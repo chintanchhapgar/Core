@@ -1,48 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using UrlShortener.Application.Abstractions.Persistence;
 using UrlShortener.Domain.Entities;
-using UrlShortener.Domain.Interfaces;
 using UrlShortener.Persistence.Context;
 
 namespace UrlShortener.Persistence.Repositories;
 
-public sealed class ShortUrlRepository : IShortUrlRepository
+public sealed class ShortUrlRepository
+    : RepositoryBase<ShortUrl>,
+      IShortUrlRepository
 {
-    private readonly ApplicationDbContext _context;
-
     public ShortUrlRepository(ApplicationDbContext context)
+        : base(context)
     {
-        _context = context;
-    }
-
-    public async Task AddAsync(ShortUrl entity, CancellationToken cancellationToken = default)
-    {
-        await _context.ShortUrls.AddAsync(entity, cancellationToken);
-    }
-
-    public void Update(ShortUrl entity)
-    {
-        _context.ShortUrls.Update(entity);
-    }
-
-    public async Task<ShortUrl?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default)
-    {
-        return await _context.ShortUrls
-            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
     public async Task<ShortUrl?> GetByShortCodeAsync(
         string shortCode,
         CancellationToken cancellationToken = default)
     {
-        return await _context.ShortUrls
-            .FirstOrDefaultAsync(x => x.ShortCode == shortCode, cancellationToken);
+        return await DbSet.FirstOrDefaultAsync(
+            x => x.ShortCode == shortCode,
+            cancellationToken);
     }
 }

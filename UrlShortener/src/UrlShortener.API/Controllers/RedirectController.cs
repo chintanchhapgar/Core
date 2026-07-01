@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using UrlShortener.Application.Features.Urls.Queries.Redirect;
+using UrlShortener.Application.Features.Urls.Commands.ResolveShortUrl;
 
 namespace UrlShortener.API.Controllers;
 
@@ -17,7 +17,7 @@ public class RedirectController : ControllerBase
     [HttpGet("{shortCode}")]
     public async Task<IActionResult> RedirectToOriginal(string shortCode)
     {
-        var url = await _mediator.Send(new GetOriginalUrlQuery(shortCode));
+        var url = await _mediator.Send(new ResolveShortUrlCommand(shortCode));
 
         if (url is null)
             return NotFound();

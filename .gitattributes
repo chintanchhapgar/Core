@@ -1,0 +1,15 @@
+* text=auto
+
+*.cs text
+*.csproj text
+*.sln text
+*.json text
+*.xml text
+*.config text
+*.md text
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

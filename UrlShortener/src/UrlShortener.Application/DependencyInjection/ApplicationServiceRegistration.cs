@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using UrlShortener.Application.Behaviors;
 
 namespace UrlShortener.Application.DependencyInjection;
 
@@ -16,7 +11,11 @@ public static class ApplicationServiceRegistration
         this IServiceCollection services)
     {
         services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(typeof(ApplicationServiceRegistration).Assembly));
+        {
+            cfg.RegisterServicesFromAssembly(typeof(ApplicationServiceRegistration).Assembly);
+
+            cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+        });
 
         services.AddValidatorsFromAssembly(typeof(ApplicationServiceRegistration).Assembly);
 

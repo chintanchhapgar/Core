@@ -1,28 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using MediatR;
+﻿using UrlShortener.Application.Abstractions.Messaging;
+using UrlShortener.Application.Abstractions.Persistence;
 using UrlShortener.Application.Features.Urls.DTOs;
 using UrlShortener.Domain.Entities;
-using UrlShortener.Domain.Interfaces;
 
 namespace UrlShortener.Application.Features.Urls.Commands.CreateShortUrl;
 
 public sealed class CreateShortUrlCommandHandler
-    : IRequestHandler<CreateShortUrlCommand, ShortUrlDto>
+    : ICommandHandler<CreateShortUrlCommand, ShortUrlDto>
 {
     private readonly IShortUrlRepository _repository;
-    private readonly IUnitOfWork _unitOfWork;
 
     public CreateShortUrlCommandHandler(
-        IShortUrlRepository repository,
-        IUnitOfWork unitOfWork)
+        IShortUrlRepository repository)
     {
         _repository = repository;
-        _unitOfWork = unitOfWork;
     }
 
     public async Task<ShortUrlDto> Handle(
@@ -37,8 +28,6 @@ public sealed class CreateShortUrlCommandHandler
             shortCode);
 
         await _repository.AddAsync(entity, cancellationToken);
-
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return new ShortUrlDto
         {

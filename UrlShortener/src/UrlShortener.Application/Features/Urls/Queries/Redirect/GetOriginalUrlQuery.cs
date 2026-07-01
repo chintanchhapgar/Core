@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace UrlShortener.Application.Features.Urls.Queries.Redirect;
+﻿using UrlShortener.Application.Abstractions.Messaging;
 
 public sealed record GetOriginalUrlQuery(string ShortCode)
-    : IRequest<string?>;
+    : IQuery<string?>;
