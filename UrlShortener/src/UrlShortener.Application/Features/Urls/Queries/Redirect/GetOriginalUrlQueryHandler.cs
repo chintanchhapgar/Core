@@ -7,10 +7,15 @@ public sealed class GetOriginalUrlQueryHandler
     : IRequestHandler<GetOriginalUrlQuery, string?>
 {
     private readonly IShortUrlRepository _repository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public GetOriginalUrlQueryHandler(IShortUrlRepository repository)
+
+    public GetOriginalUrlQueryHandler(
+        IShortUrlRepository repository,
+        IUnitOfWork unitOfWork)
     {
         _repository = repository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<string?> Handle(
@@ -26,7 +31,9 @@ public sealed class GetOriginalUrlQueryHandler
 
         entity.RegisterClick();
 
-        await _repository.UpdateAsync(entity, cancellationToken);
+        _repository.Update(entity);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return entity.OriginalUrl;
     }

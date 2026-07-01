@@ -15,11 +15,14 @@ public sealed class CreateShortUrlCommandHandler
     : IRequestHandler<CreateShortUrlCommand, ShortUrlDto>
 {
     private readonly IShortUrlRepository _repository;
+    private readonly IUnitOfWork _unitOfWork;
 
     public CreateShortUrlCommandHandler(
-        IShortUrlRepository repository)
+        IShortUrlRepository repository,
+        IUnitOfWork unitOfWork)
     {
         _repository = repository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<ShortUrlDto> Handle(
@@ -33,9 +36,9 @@ public sealed class CreateShortUrlCommandHandler
             request.OriginalUrl,
             shortCode);
 
-        await _repository.AddAsync(
-            entity,
-            cancellationToken);
+        await _repository.AddAsync(entity, cancellationToken);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return new ShortUrlDto
         {

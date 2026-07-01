@@ -24,7 +24,7 @@ public static class PersistenceServiceCollectionExtensions
                 configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IShortUrlRepository, ShortUrlRepository>();
-
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         return services;
     }
 }

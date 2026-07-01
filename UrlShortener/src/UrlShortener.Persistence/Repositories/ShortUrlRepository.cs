@@ -20,22 +20,14 @@ public sealed class ShortUrlRepository : IShortUrlRepository
         _context = context;
     }
 
-    public async Task AddAsync(
-        ShortUrl entity,
-        CancellationToken cancellationToken = default)
+    public async Task AddAsync(ShortUrl entity, CancellationToken cancellationToken = default)
     {
         await _context.ShortUrls.AddAsync(entity, cancellationToken);
-
-        await _context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task UpdateAsync(
-        ShortUrl entity,
-        CancellationToken cancellationToken = default)
+    public void Update(ShortUrl entity)
     {
         _context.ShortUrls.Update(entity);
-
-        await _context.SaveChangesAsync(cancellationToken);
     }
 
     public async Task<ShortUrl?> GetByIdAsync(
