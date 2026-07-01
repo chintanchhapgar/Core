@@ -17,4 +17,5 @@ public interface IShortUrlRepository
     Task AddAsync(ShortUrl entity, CancellationToken cancellationToken = default);
 
     Task UpdateAsync(ShortUrl entity, CancellationToken cancellationToken = default);
+
 }
