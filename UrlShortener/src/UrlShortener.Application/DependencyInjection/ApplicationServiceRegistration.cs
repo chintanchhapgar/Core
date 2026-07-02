@@ -14,6 +14,7 @@ public static class ApplicationServiceRegistration
         {
             cfg.RegisterServicesFromAssembly(typeof(ApplicationServiceRegistration).Assembly);
 
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
             cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
         });
 
