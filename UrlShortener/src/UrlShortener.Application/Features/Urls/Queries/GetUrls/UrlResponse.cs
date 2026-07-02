@@ -1,12 +1,12 @@
-﻿namespace UrlShortener.Application.Features.Admin.GetAllUrls;
+﻿namespace UrlShortener.Application.Features.Urls.Queries.GetUrls;
 
-public sealed class AdminUrlResponse
+public sealed class UrlResponse
 {
     public Guid Id { get; init; }
 
-    public string OriginalUrl { get; init; } = default!;
+    public string OriginalUrl { get; init; } = string.Empty;
 
-    public string ShortCode { get; init; } = default!;
+    public string ShortCode { get; init; } = string.Empty;
 
     public bool IsActive { get; init; }
 

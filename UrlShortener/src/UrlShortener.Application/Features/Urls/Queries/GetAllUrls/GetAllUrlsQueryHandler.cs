@@ -1,7 +1,7 @@
 ﻿using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
 
-namespace UrlShortener.Application.Features.Admin.GetAllUrls;
+namespace UrlShortener.Application.Features.Urls.Queries.GetAllUrls;
 
 public sealed class GetAllUrlsQueryHandler
     : IQueryHandler<GetAllUrlsQuery, IReadOnlyList<AdminUrlResponse>>

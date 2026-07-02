@@ -1,19 +1,25 @@
-﻿using UrlShortener.Application.Abstractions.Messaging;
+﻿using UrlShortener.Application.Abstractions.Authentication;
+using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Common.Extensions;
+using UrlShortener.Domain.Entities;
 
-namespace UrlShortener.Application.Features.Admin.ActivateUrl;
+namespace UrlShortener.Application.Features.Urls.Commands.ActivateUrl;
 
 public sealed class ActivateUrlCommandHandler
     : ICommandHandler<ActivateUrlCommand>
 {
     private readonly IShortUrlRepository _repository;
+    private readonly ICurrentUserService _currentUser;
     private readonly IUnitOfWork _unitOfWork;
 
     public ActivateUrlCommandHandler(
         IShortUrlRepository repository,
+        ICurrentUserService currentUser,
         IUnitOfWork unitOfWork)
     {
         _repository = repository;
+        _currentUser = currentUser;
         _unitOfWork = unitOfWork;
     }
 
@@ -21,12 +27,14 @@ public sealed class ActivateUrlCommandHandler
         ActivateUrlCommand request,
         CancellationToken cancellationToken)
     {
-        var url = await _repository.GetByIdAsync(
-            request.UrlId,
-            cancellationToken);
+        var url = await _repository.GetRequiredAccessibleUrlAsync(
+     request.UrlId,
+     _currentUser.IsAdmin,
+     _currentUser.UserId,
+     cancellationToken);
 
         if (url is null)
-            throw new KeyNotFoundException("URL not found.");
+            throw new KeyNotFoundException("Short URL not found.");
 
         url.Activate();
 

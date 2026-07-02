@@ -61,6 +61,14 @@ public class ShortUrl : AuditableEntity
         ExpiresOnUtc = expiresOnUtc;
     }
 
+    public void Update(
+    string originalUrl,
+    DateTime? expiresOnUtc)
+    {
+        OriginalUrl = originalUrl;
+        ExpiresOnUtc = expiresOnUtc;
+    }
+
     public ICollection<ShortUrlVisit> Visits { get; private set; }
     = new List<ShortUrlVisit>();
 }

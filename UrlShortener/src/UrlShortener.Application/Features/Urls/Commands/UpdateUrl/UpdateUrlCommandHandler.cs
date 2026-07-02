@@ -1,0 +1,43 @@
+﻿using UrlShortener.Application.Abstractions.Authentication;
+using UrlShortener.Application.Abstractions.Messaging;
+using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Common.Extensions;
+
+namespace UrlShortener.Application.Features.Urls.Commands.UpdateUrl;
+
+public sealed class UpdateUrlCommandHandler
+    : ICommandHandler<UpdateUrlCommand>
+{
+    private readonly ICurrentUserService _currentUser;
+    private readonly IShortUrlRepository _repository;
+    private readonly IUnitOfWork _unitOfWork;
+
+    public UpdateUrlCommandHandler(
+        ICurrentUserService currentUser,
+        IShortUrlRepository repository,
+        IUnitOfWork unitOfWork)
+    {
+        _currentUser = currentUser;
+        _repository = repository;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task Handle(
+        UpdateUrlCommand request,
+        CancellationToken cancellationToken)
+    {
+        var url = await _repository.GetRequiredAccessibleUrlAsync(
+            request.UrlId,
+            _currentUser.IsAdmin,
+            _currentUser.UserId,
+            cancellationToken);
+
+        url.Update(
+            request.OriginalUrl,
+            request.ExpirationDateUtc);
+
+        _repository.Update(url);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+    }
+}

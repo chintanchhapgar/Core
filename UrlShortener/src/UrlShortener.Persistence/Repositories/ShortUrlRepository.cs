@@ -116,4 +116,39 @@ public sealed class ShortUrlRepository
     {
         DbSet.Remove(shortUrl);
     }
+
+    public async Task<ShortUrl?> GetAccessibleUrlAsync(
+    Guid id,
+    bool isAdmin,
+    Guid? userId,
+    CancellationToken cancellationToken = default)
+    {
+        IQueryable<ShortUrl> query = DbSet;
+
+        if (!isAdmin)
+        {
+            query = query.Where(x => x.UserId == userId);
+        }
+
+        return await query
+            .Include(x => x.Visits)
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+    }
+
+    public async Task<IReadOnlyList<ShortUrl>> GetAccessibleUrlsAsync(
+        bool isAdmin,
+        Guid? userId,
+        CancellationToken cancellationToken = default)
+    {
+        IQueryable<ShortUrl> query = DbSet;
+
+        if (!isAdmin)
+        {
+            query = query.Where(x => x.UserId == userId);
+        }
+
+        return await query
+            .OrderByDescending(x => x.CreatedOnUtc)
+            .ToListAsync(cancellationToken);
+    }
 }

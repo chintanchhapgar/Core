@@ -60,4 +60,15 @@ public interface IShortUrlRepository
     CancellationToken cancellationToken = default);
 
     void Delete(ShortUrl shortUrl);
+
+    Task<ShortUrl?> GetAccessibleUrlAsync(
+     Guid id,
+     bool isAdmin,
+     Guid? userId,
+     CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<ShortUrl>> GetAccessibleUrlsAsync(
+        bool isAdmin,
+        Guid? userId,
+        CancellationToken cancellationToken = default);
 }
