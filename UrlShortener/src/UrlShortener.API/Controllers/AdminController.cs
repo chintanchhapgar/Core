@@ -1,11 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using UrlShortener.Application.Features.Admin.Dashboard;
-using UrlShortener.Application.Features.Admin.GetAllUrls;
+using UrlShortener.Application.Common.Responses;
 using UrlShortener.Application.Features.Admin.ActivateUrl;
+using UrlShortener.Application.Features.Admin.Dashboard;
 using UrlShortener.Application.Features.Admin.DeactivateUrl;
 using UrlShortener.Application.Features.Admin.DeleteUrl;
+using UrlShortener.Application.Features.Admin.GetAllUrls;
 
 [Authorize(Roles = "Admin")]
 [ApiController]
@@ -43,14 +44,18 @@ public sealed class AdminController : ControllerBase
 
     [HttpPut("urls/{id:guid}/activate")]
     public async Task<IActionResult> Activate(
-    Guid id,
-    CancellationToken cancellationToken)
+     Guid id,
+     CancellationToken cancellationToken)
     {
         await _mediator.Send(
             new ActivateUrlCommand(id),
             cancellationToken);
 
-        return NoContent();
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "Short URL activated successfully."
+        });
     }
 
     [HttpPut("urls/{id:guid}/deactivate")]
@@ -62,7 +67,11 @@ public sealed class AdminController : ControllerBase
             new DeactivateUrlCommand(id),
             cancellationToken);
 
-        return NoContent();
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "Short URL deactivated successfully."
+        });
     }
 
     [HttpDelete("urls/{id:guid}")]
@@ -74,6 +83,10 @@ public sealed class AdminController : ControllerBase
             new DeleteUrlCommand(id),
             cancellationToken);
 
-        return NoContent();
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "Short URL deleted successfully."
+        });
     }
 }

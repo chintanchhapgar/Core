@@ -21,30 +21,43 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
-        _logger.LogError(
-            exception,
-            "An unhandled exception occurred.");
+        _logger.LogError(exception, "An unhandled exception occurred.");
 
         var statusCode = exception switch
         {
+            ValidationException => StatusCodes.Status400BadRequest,
             DuplicateShortCodeException => StatusCodes.Status409Conflict,
-
             KeyNotFoundException => StatusCodes.Status404NotFound,
-
-            //ValidationException => StatusCodes.Status400BadRequest,
-
-            UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
-
+            UnauthorizedAccessException => StatusCodes.Status403Forbidden,
             _ => StatusCodes.Status500InternalServerError
         };
 
-        var problem = new ProblemDetails
+        ProblemDetails problem;
+
+        if (exception is ValidationException validationException)
         {
-            Title = ReasonPhrases.GetReasonPhrase(statusCode),
-            Detail = exception.Message,
-            Status = statusCode,
-            Instance = httpContext.Request.Path
-        };
+            problem = new ValidationProblemDetails(
+                validationException.Errors
+                    .GroupBy(x => x.PropertyName)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.Select(x => x.ErrorMessage).ToArray()))
+            {
+                Title = "Validation Failed",
+                Status = statusCode,
+                Instance = httpContext.Request.Path
+            };
+        }
+        else
+        {
+            problem = new ProblemDetails
+            {
+                Title = ReasonPhrases.GetReasonPhrase(statusCode),
+                Detail = exception.Message,
+                Status = statusCode,
+                Instance = httpContext.Request.Path
+            };
+        }
 
         problem.Extensions["traceId"] = httpContext.TraceIdentifier;
 
