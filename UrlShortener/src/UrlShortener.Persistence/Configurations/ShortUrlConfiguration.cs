@@ -33,5 +33,10 @@ public sealed class ShortUrlConfiguration : IEntityTypeConfiguration<ShortUrl>
 
         builder.Property(x => x.IsActive)
             .HasDefaultValue(true);
+
+        builder.HasMany(x => x.Visits)
+            .WithOne()
+            .HasForeignKey(x => x.ShortUrlId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

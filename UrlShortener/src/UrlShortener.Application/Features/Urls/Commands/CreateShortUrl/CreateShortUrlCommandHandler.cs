@@ -1,4 +1,5 @@
-﻿using UrlShortener.Application.Abstractions.Messaging;
+﻿using UrlShortener.Application.Abstractions.Authentication;
+using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
 using UrlShortener.Application.Abstractions.Services;
 using UrlShortener.Application.Features.Urls.DTOs;
@@ -11,12 +12,15 @@ public sealed class CreateShortUrlCommandHandler
 {
     private readonly IShortUrlRepository _repository;
     private readonly IShortCodeGenerator _generator;
+    private readonly ICurrentUserService _currentUser;
     public CreateShortUrlCommandHandler(
-     IShortUrlRepository repository,
-     IShortCodeGenerator generator)
+    IShortUrlRepository repository,
+    IShortCodeGenerator generator,
+    ICurrentUserService currentUser)
     {
         _repository = repository;
         _generator = generator;
+        _currentUser = currentUser;
     }
     public async Task<ShortUrlDto> Handle(
     CreateShortUrlCommand request,
@@ -45,7 +49,8 @@ public sealed class CreateShortUrlCommandHandler
 
         var entity = new ShortUrl(
             request.OriginalUrl,
-            shortCode);
+            shortCode,
+            _currentUser.UserId);
 
         entity.SetExpiration(request.ExpiresOnUtc);
 

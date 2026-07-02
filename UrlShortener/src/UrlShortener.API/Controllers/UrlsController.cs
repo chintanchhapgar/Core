@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UrlShortener.Application.Features.Urls.Analytics;
 using UrlShortener.Application.Features.Urls.Commands.CreateShortUrl;
 
 namespace UrlShortener.API.Controllers;
@@ -15,6 +17,7 @@ public class UrlsController : ControllerBase
         _mediator = mediator;
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create(CreateShortUrlCommand command)
     {
@@ -28,6 +31,16 @@ public class UrlsController : ControllerBase
             ShortUrl = $"{Request.Scheme}://{Request.Host}/{dto.ShortCode}",
             ClickCount = dto.ClickCount
         };
+
+        return Ok(response);
+    }
+
+    [Authorize]
+    [HttpGet("{id:guid}/analytics")]
+    public async Task<IActionResult> GetAnalytics(Guid id)
+    {
+        var response = await _mediator.Send(
+            new GetUrlAnalyticsQuery(id));
 
         return Ok(response);
     }

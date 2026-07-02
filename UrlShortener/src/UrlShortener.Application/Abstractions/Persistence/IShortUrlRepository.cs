@@ -19,6 +19,18 @@ public interface IShortUrlRepository
         string shortCode,
         CancellationToken cancellationToken = default);
 
+    Task<IReadOnlyList<ShortUrl>> GetUrlsByUserIdAsync(
+    Guid? userId,
+    CancellationToken cancellationToken);
+
+    Task AddVisitAsync(
+    ShortUrlVisit visit,
+    CancellationToken cancellationToken);
+
+    Task<ShortUrl?> GetWithVisitsAsync(
+    Guid id,
+    CancellationToken cancellationToken = default);
+
     Task AddAsync(
         ShortUrl entity,
         CancellationToken cancellationToken = default);

@@ -1,7 +1,6 @@
 ﻿using BCrypt.Net;
-using UrlShortener.Application.Abstractions.Security;
+namespace UrlShortener.Application.Abstractions.Security;
 
-namespace UrlShortener.Infrastructure.Security;
 
 public sealed class PasswordHasher : IPasswordHasher
 {

@@ -32,4 +32,14 @@ public sealed class UserRepository : IUserRepository
             user,
             cancellationToken);
     }
+
+    public Task<List<ShortUrl>> GetUrlsAsync(
+    Guid userId,
+    CancellationToken cancellationToken)
+    {
+        return _context.ShortUrls
+            .Where(x => x.UserId == userId)
+            .OrderByDescending(x => x.CreatedOnUtc)
+            .ToListAsync(cancellationToken);
+    }
 }

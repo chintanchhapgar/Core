@@ -1,5 +1,7 @@
 ﻿using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Abstractions.Services;
+using UrlShortener.Domain.Entities;
 
 namespace UrlShortener.Application.Features.Urls.Commands.ResolveShortUrl;
 
@@ -7,11 +9,14 @@ public sealed class ResolveShortUrlCommandHandler
     : ICommandHandler<ResolveShortUrlCommand, string?>
 {
     private readonly IShortUrlRepository _repository;
+    private readonly IRequestInfoProvider _requestInfoProvider;
 
     public ResolveShortUrlCommandHandler(
-        IShortUrlRepository repository)
+        IShortUrlRepository repository,
+        IRequestInfoProvider requestInfoProvider)
     {
         _repository = repository;
+        _requestInfoProvider = requestInfoProvider;
     }
 
     public async Task<string?> Handle(
@@ -41,7 +46,23 @@ public sealed class ResolveShortUrlCommandHandler
 
         entity.RegisterClick();
 
+        var requestInfo = _requestInfoProvider.GetCurrentRequest();
+
+        var visit = new ShortUrlVisit(
+            entity.Id,
+            requestInfo.IpAddress,
+            requestInfo.UserAgent,
+            requestInfo.Browser,
+            requestInfo.OperatingSystem,
+            requestInfo.Referrer);
+
         _repository.Update(entity);
+
+        await _repository.AddVisitAsync(
+            visit,
+            cancellationToken);
+
+        // TransactionBehavior will call SaveChangesAsync()
 
         return entity.OriginalUrl;
     }

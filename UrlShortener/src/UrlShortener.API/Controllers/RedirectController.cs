@@ -24,4 +24,6 @@ public class RedirectController : ControllerBase
 
         return Redirect(url);
     }
+
+
 }

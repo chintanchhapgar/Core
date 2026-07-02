@@ -24,10 +24,11 @@ public sealed class JwtProvider : IJwtProvider
 
         var claims = new[]
         {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-        new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}")
-    };
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}")
+        };
 
         var key = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(_settings.SecretKey));

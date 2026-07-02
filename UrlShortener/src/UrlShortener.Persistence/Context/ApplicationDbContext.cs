@@ -18,6 +18,7 @@ public sealed class ApplicationDbContext : DbContext
 
     public DbSet<ShortUrl> ShortUrls => Set<ShortUrl>();
     public DbSet<User> Users => Set<User>();
+    public DbSet<ShortUrlVisit> ShortUrlVisits => Set<ShortUrlVisit>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
