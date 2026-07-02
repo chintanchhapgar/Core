@@ -17,6 +17,12 @@ public sealed class CreateShortUrlCommandValidator
             .Matches("^[a-zA-Z0-9_-]*$")
             .When(x => !string.IsNullOrWhiteSpace(x.CustomAlias))
             .WithMessage("Alias may contain only letters, numbers, '-' and '_'.");
+
+        RuleFor(x => x.ExpiresOnUtc)
+        .Must(date =>
+            !date.HasValue ||
+            date.Value > DateTime.UtcNow)
+        .WithMessage("Expiration date must be in the future.");
     }
 
     private static bool BeValidUrl(string url)

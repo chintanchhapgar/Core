@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UrlShortener.Application.Features.Urls.DTOs;
+﻿namespace UrlShortener.Application.Features.Urls.DTOs;
 
 public sealed class ShortUrlDto
 {
@@ -14,5 +8,11 @@ public sealed class ShortUrlDto
 
     public string ShortCode { get; init; } = default!;
 
+    public string ShortUrl { get; init; } = default!;
+
     public int ClickCount { get; init; }
+
+    public DateTime? ExpiresOnUtc { get; init; }
+
+    public bool IsActive { get; init; }
 }

@@ -28,5 +28,10 @@ public sealed class ShortUrlConfiguration : IEntityTypeConfiguration<ShortUrl>
 
         builder.Property(x => x.CreatedOnUtc)
             .IsRequired();
+
+        builder.Property(x => x.ExpiresOnUtc);
+
+        builder.Property(x => x.IsActive)
+            .HasDefaultValue(true);
     }
 }

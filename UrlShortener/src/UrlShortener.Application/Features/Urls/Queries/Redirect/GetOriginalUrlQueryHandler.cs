@@ -25,6 +25,20 @@ public sealed class ResolveShortUrlCommandHandler
         if (entity is null)
             return null;
 
+        // Prevent redirect if disabled
+        if (!entity.IsActive)
+        {
+            throw new InvalidOperationException(
+                "This short URL has been deactivated.");
+        }
+
+        // Prevent redirect if expired
+        if (entity.IsExpired())
+        {
+            throw new InvalidOperationException(
+                "This short URL has expired.");
+        }
+
         entity.RegisterClick();
 
         _repository.Update(entity);

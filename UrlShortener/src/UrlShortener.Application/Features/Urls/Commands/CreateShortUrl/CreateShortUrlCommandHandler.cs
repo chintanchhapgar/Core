@@ -47,6 +47,8 @@ public sealed class CreateShortUrlCommandHandler
             request.OriginalUrl,
             shortCode);
 
+        entity.SetExpiration(request.ExpiresOnUtc);
+
         await _repository.AddAsync(entity, cancellationToken);
 
         return new ShortUrlDto
@@ -54,7 +56,9 @@ public sealed class CreateShortUrlCommandHandler
             Id = entity.Id,
             OriginalUrl = entity.OriginalUrl,
             ShortCode = entity.ShortCode,
-            ClickCount = entity.ClickCount
+            ClickCount = entity.ClickCount,
+            ExpiresOnUtc = entity.ExpiresOnUtc,
+            IsActive = entity.IsActive
         };
     }
 }

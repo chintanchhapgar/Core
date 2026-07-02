@@ -5,5 +5,6 @@ namespace UrlShortener.Application.Features.Urls.Commands.CreateShortUrl;
 
 public sealed record CreateShortUrlCommand(
     string OriginalUrl,
-    string? CustomAlias)
+    string? CustomAlias,
+    DateTime? ExpiresOnUtc)
     : ICommand<ShortUrlDto>;

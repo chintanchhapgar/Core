@@ -15,6 +15,9 @@ public class ShortUrl : AuditableEntity
 
     public int ClickCount { get; private set; }
 
+    public DateTime? ExpiresOnUtc { get; private set; }
+
+    public bool IsActive { get; private set; } = true;
     private ShortUrl()
     {
     }
@@ -28,5 +31,26 @@ public class ShortUrl : AuditableEntity
     public void RegisterClick()
     {
         ClickCount++;
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
+    }
+
+    public void Activate()
+    {
+        IsActive = true;
+    }
+
+    public bool IsExpired()
+    {
+        return ExpiresOnUtc.HasValue &&
+               ExpiresOnUtc.Value <= DateTime.UtcNow;
+    }
+
+    public void SetExpiration(DateTime? expiresOnUtc)
+    {
+        ExpiresOnUtc = expiresOnUtc;
     }
 }
