@@ -21,9 +21,12 @@ public static class PersistenceServiceCollectionExtensions
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection")));
+
         services.AddScoped<ShortUrlRepository>();
         services.AddScoped<IShortUrlRepository, ShortUrlRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IUserRepository, UserRepository>();
+
         return services;
     }
 }

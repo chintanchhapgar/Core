@@ -17,10 +17,17 @@ public sealed class ApplicationDbContext : DbContext
     }
 
     public DbSet<ShortUrl> ShortUrls => Set<ShortUrl>();
+    public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+        modelBuilder.Entity<ShortUrl>()
+            .HasOne<User>()
+            .WithMany(x => x.ShortUrls)
+            .HasForeignKey(x => x.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(modelBuilder);
     }

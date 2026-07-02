@@ -16,16 +16,23 @@ public class ShortUrl : AuditableEntity
     public int ClickCount { get; private set; }
 
     public DateTime? ExpiresOnUtc { get; private set; }
+    public Guid? UserId { get; private set; }
 
     public bool IsActive { get; private set; } = true;
     private ShortUrl()
     {
     }
 
-    public ShortUrl(string originalUrl, string shortCode)
+    public ShortUrl(
+    string originalUrl,
+    string shortCode,
+    Guid? userId = null)
     {
+        Id = Guid.NewGuid();
         OriginalUrl = originalUrl;
         ShortCode = shortCode;
+        UserId = userId;
+        CreatedOnUtc = DateTime.UtcNow;
     }
 
     public void RegisterClick()
