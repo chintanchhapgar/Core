@@ -36,6 +36,17 @@ public sealed class ShortUrlRepository
             .ToListAsync(cancellationToken);
     }
 
+    public async Task<ShortUrl?> GetByIdAndUserAsync(
+    Guid id,
+    Guid userId,
+    CancellationToken cancellationToken = default)
+    {
+        return await DbSet.FirstOrDefaultAsync(
+            x => x.Id == id &&
+                 x.UserId == userId,
+            cancellationToken);
+    }
+
     public async Task<ShortUrl?> GetWithVisitsAsync(
     Guid id,
     CancellationToken cancellationToken = default)

@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿using UrlShortener.Application.Abstractions.Messaging;
 
-namespace UrlShortener.Application.Features.Urls.GetMyUrls;
+namespace UrlShortener.Application.Features.Urls.GetMyUrl;
 
-public sealed record GetMyUrlsQuery()
-    : IRequest<IReadOnlyList<MyUrlResponse>>;
+public sealed record GetMyUrlQuery(Guid UrlId)
+    : IQuery<MyUrlDetailResponse>;

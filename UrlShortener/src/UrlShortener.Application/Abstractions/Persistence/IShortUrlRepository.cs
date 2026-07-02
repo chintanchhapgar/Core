@@ -23,6 +23,11 @@ public interface IShortUrlRepository
     Guid? userId,
     CancellationToken cancellationToken);
 
+    Task<ShortUrl?> GetByIdAndUserAsync(
+    Guid id,
+    Guid userId,
+    CancellationToken cancellationToken = default);
+
     Task AddVisitAsync(
     ShortUrlVisit visit,
     CancellationToken cancellationToken);

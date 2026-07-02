@@ -1,6 +1,6 @@
-﻿namespace UrlShortener.Application.Features.Urls.GetMyUrl;
+﻿namespace UrlShortener.Application.Features.Urls.GetUrls;
 
-public sealed class MyUrlDetailResponse
+public sealed class UrlResponse
 {
     public Guid Id { get; init; }
 

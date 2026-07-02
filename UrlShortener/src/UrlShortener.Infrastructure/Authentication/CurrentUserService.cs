@@ -8,8 +8,7 @@ public sealed class CurrentUserService : ICurrentUserService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public CurrentUserService(
-        IHttpContextAccessor httpContextAccessor)
+    public CurrentUserService(IHttpContextAccessor httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
     }
@@ -18,14 +17,16 @@ public sealed class CurrentUserService : ICurrentUserService
     {
         get
         {
-            var value = _httpContextAccessor
-                .HttpContext?
+            var id = _httpContextAccessor.HttpContext?
                 .User
                 .FindFirstValue(ClaimTypes.NameIdentifier);
 
-            return Guid.TryParse(value, out var id)
-                ? id
+            return Guid.TryParse(id, out var guid)
+                ? guid
                 : null;
         }
     }
+
+    public bool IsAdmin =>
+        _httpContextAccessor.HttpContext?.User.IsInRole("Admin") ?? false;
 }

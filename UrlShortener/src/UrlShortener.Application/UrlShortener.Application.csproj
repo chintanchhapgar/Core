@@ -1,6 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <Compile Remove="Features\Urls\GetMyUrls\**" />
+    <EmbeddedResource Remove="Features\Urls\GetMyUrls\**" />
+    <None Remove="Features\Urls\GetMyUrls\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\UrlShortener.Domain\UrlShortener.Domain.csproj" />
   </ItemGroup>
 

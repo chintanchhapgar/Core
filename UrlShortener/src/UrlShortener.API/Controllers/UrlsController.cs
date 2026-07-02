@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Application.Features.Urls.Analytics;
 using UrlShortener.Application.Features.Urls.Commands.CreateShortUrl;
+using UrlShortener.Application.Features.Urls.GetUrls;
 
 namespace UrlShortener.API.Controllers;
 
@@ -41,6 +42,19 @@ public class UrlsController : ControllerBase
     {
         var response = await _mediator.Send(
             new GetUrlAnalyticsQuery(id));
+
+        return Ok(response);
+    }
+
+
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> GetUrls(
+    CancellationToken cancellationToken)
+    {
+        var response = await _mediator.Send(
+            new GetUrlsQuery(),
+            cancellationToken);
 
         return Ok(response);
     }
