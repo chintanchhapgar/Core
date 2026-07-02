@@ -10,9 +10,9 @@ public sealed class ShortUrlDto
 {
     public Guid Id { get; init; }
 
-    public string OriginalUrl { get; init; } = string.Empty;
+    public string OriginalUrl { get; init; } = default!;
 
-    public string ShortCode { get; init; } = string.Empty;
+    public string ShortCode { get; init; } = default!;
 
     public int ClickCount { get; init; }
 }

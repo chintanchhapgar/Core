@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Abstractions.Services;
 using UrlShortener.Persistence.Context;
 using UrlShortener.Persistence.Repositories;
-
 namespace UrlShortener.Persistence.DependencyInjection;
 
 public static class PersistenceServiceCollectionExtensions

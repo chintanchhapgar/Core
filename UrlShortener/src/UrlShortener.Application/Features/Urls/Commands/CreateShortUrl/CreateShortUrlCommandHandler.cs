@@ -1,5 +1,6 @@
 ﻿using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Abstractions.Services;
 using UrlShortener.Application.Features.Urls.DTOs;
 using UrlShortener.Domain.Entities;
 
@@ -9,19 +10,38 @@ public sealed class CreateShortUrlCommandHandler
     : ICommandHandler<CreateShortUrlCommand, ShortUrlDto>
 {
     private readonly IShortUrlRepository _repository;
-
+    private readonly IShortCodeGenerator _generator;
     public CreateShortUrlCommandHandler(
-        IShortUrlRepository repository)
+     IShortUrlRepository repository,
+     IShortCodeGenerator generator)
     {
         _repository = repository;
+        _generator = generator;
     }
-
     public async Task<ShortUrlDto> Handle(
-        CreateShortUrlCommand request,
-        CancellationToken cancellationToken)
+    CreateShortUrlCommand request,
+    CancellationToken cancellationToken)
     {
-        var shortCode = Guid.NewGuid()
-            .ToString("N")[..8];
+        string shortCode;
+
+        if (!string.IsNullOrWhiteSpace(request.CustomAlias))
+        {
+            var exists = await _repository.GetByShortCodeAsync(
+                request.CustomAlias,
+                cancellationToken);
+
+            if (exists is not null)
+            {
+                throw new InvalidOperationException(
+                    "Custom alias already exists.");
+            }
+
+            shortCode = request.CustomAlias;
+        }
+        else
+        {
+            shortCode = await _generator.GenerateAsync(cancellationToken);
+        }
 
         var entity = new ShortUrl(
             request.OriginalUrl,

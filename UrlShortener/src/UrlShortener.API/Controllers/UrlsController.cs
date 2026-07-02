@@ -18,8 +18,17 @@ public class UrlsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(CreateShortUrlCommand command)
     {
-        var result = await _mediator.Send(command);
+        var dto = await _mediator.Send(command);
 
-        return Ok(result);
+        var response = new CreateShortUrlResponse
+        {
+            Id = dto.Id,
+            OriginalUrl = dto.OriginalUrl,
+            ShortCode = dto.ShortCode,
+            ShortUrl = $"{Request.Scheme}://{Request.Host}/{dto.ShortCode}",
+            ClickCount = dto.ClickCount
+        };
+
+        return Ok(response);
     }
 }

@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace UrlShortener.Application.Features.Urls.Commands.CreateShortUrl;
 
-public class CreateShortUrlCommandValidator
+public sealed class CreateShortUrlCommandValidator
     : AbstractValidator<CreateShortUrlCommand>
 {
     public CreateShortUrlCommandValidator()
     {
         RuleFor(x => x.OriginalUrl)
-    .NotEmpty()
-    .Must(BeValidHttpUrl)
-    .WithMessage("A valid HTTP or HTTPS URL is required.");
-    }
+            .NotEmpty()
+            .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
+            .WithMessage("A valid URL is required.");
 
-    private static bool BeValidHttpUrl(string url)
-    {
-        return Uri.TryCreate(url, UriKind.Absolute, out var uri)
-               && (uri.Scheme == Uri.UriSchemeHttp ||
-                   uri.Scheme == Uri.UriSchemeHttps);
+        RuleFor(x => x.CustomAlias)
+            .MaximumLength(30)
+            .Matches("^[a-zA-Z0-9_-]*$")
+            .When(x => !string.IsNullOrWhiteSpace(x.CustomAlias))
+            .WithMessage("Alias may contain only letters, numbers, '-' and '_'.");
     }
 }
-
