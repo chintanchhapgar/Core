@@ -15,4 +15,7 @@ public interface IUserRepository
     Task AddAsync(
         User user,
         CancellationToken cancellationToken);
+
+    Task<int> CountAsync(
+    CancellationToken cancellationToken = default);
 }

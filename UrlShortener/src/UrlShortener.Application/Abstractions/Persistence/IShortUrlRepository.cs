@@ -38,4 +38,16 @@ public interface IShortUrlRepository
     void Update(ShortUrl entity);
 
     void Remove(ShortUrl entity);
+
+    Task<int> CountAsync(
+    CancellationToken cancellationToken = default);
+
+    Task<int> CountActiveAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<int> CountExpiredAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<int> TotalClicksAsync(
+        CancellationToken cancellationToken = default);
 }

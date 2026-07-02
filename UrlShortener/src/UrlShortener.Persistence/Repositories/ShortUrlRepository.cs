@@ -53,5 +53,34 @@ public sealed class ShortUrlRepository
             visit,
             cancellationToken);
     }
+    public Task<int> CountAsync(
+    CancellationToken cancellationToken = default)
+    {
+        return DbSet.CountAsync(cancellationToken);
+    }
 
+    public Task<int> CountActiveAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return DbSet.CountAsync(
+            x => x.IsActive,
+            cancellationToken);
+    }
+
+    public Task<int> CountExpiredAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return DbSet.CountAsync(
+            x => x.ExpiresOnUtc.HasValue &&
+                 x.ExpiresOnUtc.Value < DateTime.UtcNow,
+            cancellationToken);
+    }
+
+    public Task<int> TotalClicksAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return DbSet.SumAsync(
+            x => x.ClickCount,
+            cancellationToken);
+    }
 }

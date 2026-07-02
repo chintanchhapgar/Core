@@ -3,8 +3,6 @@ using UrlShortener.Application.Abstractions.Persistence;
 using UrlShortener.Domain.Entities;
 using UrlShortener.Persistence.Context;
 
-namespace UrlShortener.Persistence.Repositories;
-
 public sealed class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;
@@ -34,12 +32,18 @@ public sealed class UserRepository : IUserRepository
     }
 
     public Task<List<ShortUrl>> GetUrlsAsync(
-    Guid userId,
-    CancellationToken cancellationToken)
+        Guid userId,
+        CancellationToken cancellationToken)
     {
         return _context.ShortUrls
             .Where(x => x.UserId == userId)
             .OrderByDescending(x => x.CreatedOnUtc)
             .ToListAsync(cancellationToken);
+    }
+
+    public Task<int> CountAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return _context.Users.CountAsync(cancellationToken);
     }
 }
