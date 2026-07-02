@@ -14,6 +14,8 @@ public sealed class User
 
     public DateTime CreatedOnUtc { get; private set; }
 
+    public string Role { get; private set; } = "User";
+
     public ICollection<ShortUrl> ShortUrls { get; private set; }
         = new List<ShortUrl>();
 
@@ -22,16 +24,16 @@ public sealed class User
     }
 
     public User(
-        string firstName,
-        string lastName,
-        string email,
-        string passwordHash)
+    string firstName,
+    string lastName,
+    string email,
+    string passwordHash,
+    string role = "User")
     {
-        Id = Guid.NewGuid();
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         PasswordHash = passwordHash;
-        CreatedOnUtc = DateTime.UtcNow;
+        Role = role;
     }
 }
