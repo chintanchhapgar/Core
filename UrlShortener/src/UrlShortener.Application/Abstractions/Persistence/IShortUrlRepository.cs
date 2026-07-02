@@ -50,4 +50,9 @@ public interface IShortUrlRepository
 
     Task<int> TotalClicksAsync(
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<ShortUrl>> GetAllAsync(
+    CancellationToken cancellationToken = default);
+
+    void Delete(ShortUrl shortUrl);
 }

@@ -83,4 +83,26 @@ public sealed class ShortUrlRepository
             x => x.ClickCount,
             cancellationToken);
     }
+
+    public async Task<IReadOnlyList<ShortUrl>> GetAllAsync(
+    CancellationToken cancellationToken = default)
+    {
+        return await DbSet
+            .OrderByDescending(x => x.CreatedOnUtc)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<ShortUrl?> GetByIdAsync(
+        Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        return await DbSet.FirstOrDefaultAsync(
+            x => x.Id == id,
+            cancellationToken);
+    }
+
+    public void Delete(ShortUrl shortUrl)
+    {
+        DbSet.Remove(shortUrl);
+    }
 }
