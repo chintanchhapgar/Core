@@ -1,6 +1,4 @@
-﻿using UrlShortener.Application.Common.Models;
-
-namespace UrlShortener.Persistence.Common.Models;
+﻿namespace UrlShortener.Application.Common.Models;
 
 public sealed class PagedResponse<T>
 {

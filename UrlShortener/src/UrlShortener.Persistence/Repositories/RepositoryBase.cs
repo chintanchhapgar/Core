@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using UrlShortener.Application.Common.Models;
 using UrlShortener.Domain.Common;
-using UrlShortener.Persistence.Common.Models;
 using UrlShortener.Persistence.Context;
 
 namespace UrlShortener.Persistence.Repositories;
@@ -27,34 +24,20 @@ public abstract class RepositoryBase<TEntity>
             : DbSet.AsNoTracking();
     }
 
-    protected async Task<PagedResponse<TResult>> GetPagedAsync<TResult>(
-         IQueryable<TEntity> query,
-        Expression<Func<TEntity, TResult>> selector,
-        int pageNumber,
-        int pageSize,
+    public virtual async Task AddAsync(
+        TEntity entity,
         CancellationToken cancellationToken = default)
     {
-        pageNumber = Math.Max(pageNumber, 1);
-        pageSize = Math.Clamp(pageSize, 1, 100);
+        await DbSet.AddAsync(entity, cancellationToken);
+    }
 
-        var totalRecords = await query.CountAsync(cancellationToken);
+    public virtual void Update(TEntity entity)
+    {
+        DbSet.Update(entity);
+    }
 
-        var items = await query
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .Select(selector)
-            .ToListAsync(cancellationToken);
-
-        return new PagedResponse<TResult>
-        {
-            Items = items,
-            Pagination = new PaginationMetadata
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                TotalRecords = totalRecords,
-                TotalPages = (int)Math.Ceiling(totalRecords / (double)pageSize)
-            }
-        };
+    public virtual void Remove(TEntity entity)
+    {
+        DbSet.Remove(entity);
     }
 }

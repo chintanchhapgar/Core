@@ -3,8 +3,8 @@ using UrlShortener.Application.Abstractions.Persistence;
 using UrlShortener.Application.Common.Models;
 using UrlShortener.Application.Features.Admin.Users.GetUsers;
 using UrlShortener.Domain.Entities;
-using UrlShortener.Persistence.Common.Models;
 using UrlShortener.Persistence.Context;
+using UrlShortener.Persistence.Extensions;
 
 namespace UrlShortener.Persistence.Repositories;
 
@@ -111,52 +111,27 @@ public sealed class UserRepository
     GetUsersQuery request,
     CancellationToken cancellationToken = default)
     {
-        IQueryable<User> query = DbSet.AsNoTracking();
+        var query = Query();
 
-        if (!string.IsNullOrWhiteSpace(request.Search))
+        query = query.Search(
+            request.Search,
+            x => x.FirstName,
+            x => x.LastName,
+            x => x.Email);
+
+        query = query.ApplyFilters(request.Filters);
+
+        query = query.ApplySorting(
+            request.SortBy,
+            request.Descending);
+
+        if (string.IsNullOrWhiteSpace(request.SortBy))
         {
-            query = query.Where(x =>
-                x.FirstName.Contains(request.Search) ||
-                x.LastName.Contains(request.Search) ||
-                x.Email.Contains(request.Search));
+            query = query.OrderByDescending(x => x.CreatedOnUtc);
         }
 
-        if (request.IsActive.HasValue)
-        {
-            query = query.Where(x =>
-                x.IsActive == request.IsActive.Value);
-        }
-
-        if (request.IsLocked.HasValue)
-        {
-            query = query.Where(x =>
-                x.IsLocked == request.IsLocked.Value);
-        }
-
-        query = request.SortBy?.ToLower() switch
-        {
-            "firstname" => request.Descending
-                ? query.OrderByDescending(x => x.FirstName)
-                : query.OrderBy(x => x.FirstName),
-
-            "lastname" => request.Descending
-                ? query.OrderByDescending(x => x.LastName)
-                : query.OrderBy(x => x.LastName),
-
-            "email" => request.Descending
-                ? query.OrderByDescending(x => x.Email)
-                : query.OrderBy(x => x.Email),
-
-            "role" => request.Descending
-                ? query.OrderByDescending(x => x.Role)
-                : query.OrderBy(x => x.Role),
-
-            _ => query.OrderByDescending(x => x.CreatedOnUtc)
-        };
-
-        return await base.GetPagedAsync(
-            query,
-            x => new UserResponse
+        return await query
+            .Select(x => new UserResponse
             {
                 Id = x.Id,
                 FirstName = x.FirstName,
@@ -168,9 +143,10 @@ public sealed class UserRepository
                 IsLocked = x.IsLocked,
                 CreatedOnUtc = x.CreatedOnUtc,
                 UpdatedOnUtc = x.UpdatedOnUtc
-            },
-            request.PageNumber,
-            request.PageSize,
-            cancellationToken);
+            })
+            .ToPagedResponseAsync(
+                request.PageNumber,
+                request.PageSize,
+                cancellationToken);
     }
 }

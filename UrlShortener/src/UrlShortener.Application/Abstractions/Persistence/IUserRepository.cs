@@ -1,7 +1,7 @@
 ﻿
+using UrlShortener.Application.Common.Models;
 using UrlShortener.Application.Features.Admin.Users.GetUsers;
 using UrlShortener.Domain.Entities;
-using UrlShortener.Persistence.Common.Models;
 
 namespace UrlShortener.Application.Abstractions.Persistence;
 

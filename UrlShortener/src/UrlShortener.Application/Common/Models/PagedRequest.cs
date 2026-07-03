@@ -1,4 +1,4 @@
-﻿namespace UrlShortener.Application.Common.Models;
+﻿using UrlShortener.Application.Common.Models;
 
 public abstract record PagedRequest
 {
@@ -11,4 +11,6 @@ public abstract record PagedRequest
     public string? SortBy { get; init; }
 
     public bool Descending { get; init; }
+
+    public List<FilterRule> Filters { get; init; } = [];
 }

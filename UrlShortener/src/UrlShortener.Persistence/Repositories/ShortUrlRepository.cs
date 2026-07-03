@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Common.Models;
 using UrlShortener.Application.Features.Urls.GetUrls;
 using UrlShortener.Application.Features.Urls.Queries.GetUrls;
 using UrlShortener.Domain.Entities;
-using UrlShortener.Persistence.Common.Models;
 using UrlShortener.Persistence.Context;
+using UrlShortener.Persistence.Extensions;
 
 namespace UrlShortener.Persistence.Repositories;
 
@@ -178,42 +179,31 @@ public sealed class ShortUrlRepository
     Guid? userId,
     CancellationToken cancellationToken = default)
     {
-        IQueryable<ShortUrl> query = DbSet.AsNoTracking();
+        var query = Query();
 
         if (!isAdmin)
         {
             query = query.Where(x => x.UserId == userId);
         }
 
-        if (!string.IsNullOrWhiteSpace(request.Search))
+        query = query.Search(
+            request.Search,
+            x => x.OriginalUrl,
+            x => x.ShortCode);
+
+        query = query.ApplyFilters(request.Filters);
+
+        query = query.ApplySorting(
+            request.SortBy,
+            request.Descending);
+
+        if (string.IsNullOrWhiteSpace(request.SortBy))
         {
-            query = query.Where(x =>
-                x.OriginalUrl.Contains(request.Search) ||
-                x.ShortCode.Contains(request.Search));
+            query = query.OrderByDescending(x => x.CreatedOnUtc);
         }
 
-        if (request.IsActive.HasValue)
-        {
-            query = query.Where(x =>
-                x.IsActive == request.IsActive.Value);
-        }
-
-        query = request.SortBy?.ToLower() switch
-        {
-            "shortcode" => request.Descending
-                ? query.OrderByDescending(x => x.ShortCode)
-                : query.OrderBy(x => x.ShortCode),
-
-            "clicks" => request.Descending
-                ? query.OrderByDescending(x => x.ClickCount)
-                : query.OrderBy(x => x.ClickCount),
-
-            _ => query.OrderByDescending(x => x.CreatedOnUtc)
-        };
-
-        return await base.GetPagedAsync(
-            query,
-            x => new UrlResponse
+        return await query
+            .Select(x => new UrlResponse
             {
                 Id = x.Id,
                 OriginalUrl = x.OriginalUrl,
@@ -222,9 +212,10 @@ public sealed class ShortUrlRepository
                 IsActive = x.IsActive,
                 CreatedOnUtc = x.CreatedOnUtc,
                 ExpiresOnUtc = x.ExpiresOnUtc
-            },
-            request.PageNumber,
-            request.PageSize,
-            cancellationToken);
+            })
+            .ToPagedResponseAsync(
+                request.PageNumber,
+                request.PageSize,
+                cancellationToken);
     }
 }
