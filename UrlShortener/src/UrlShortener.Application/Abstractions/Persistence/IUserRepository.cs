@@ -1,4 +1,5 @@
-﻿using UrlShortener.Domain.Entities;
+﻿using UrlShortener.Application.Common.Models;
+using UrlShortener.Domain.Entities;
 
 namespace UrlShortener.Application.Abstractions.Persistence;
 
@@ -18,4 +19,18 @@ public interface IUserRepository
 
     Task<int> CountAsync(
     CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<User>> GetAllAsync(
+    CancellationToken cancellationToken = default);
+
+    Task<User?> GetByIdAsync(
+        Guid id,
+        CancellationToken cancellationToken = default);
+
+    Task DeleteAsync(
+        User user,
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<UserWithUrlCount>> GetUsersWithUrlCountAsync(
+        CancellationToken cancellationToken = default);
 }
