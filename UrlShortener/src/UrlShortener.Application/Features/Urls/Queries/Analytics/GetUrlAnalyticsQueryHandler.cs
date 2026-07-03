@@ -1,7 +1,9 @@
 ﻿using UrlShortener.Application.Abstractions.Authentication;
+using UrlShortener.Application.Abstractions.Caching;
 using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
 using UrlShortener.Application.Abstractions.Services;
+using UrlShortener.Application.Common.Caching;
 
 namespace UrlShortener.Application.Features.Urls.Queries.Analytics;
 
@@ -10,19 +12,32 @@ public sealed class GetUrlAnalyticsQueryHandler
 {
     private readonly IShortUrlRepository _repository;
     private readonly ICurrentUser _currentUser;
+    private readonly ICacheService _cache;
 
     public GetUrlAnalyticsQueryHandler(
         IShortUrlRepository repository,
-        ICurrentUser currentUser)
+        ICurrentUser currentUser,
+        ICacheService cache)
     {
         _repository = repository;
         _currentUser = currentUser;
+        _cache = cache;
     }
 
     public async Task<UrlAnalyticsResponse> Handle(
         GetUrlAnalyticsQuery request,
         CancellationToken cancellationToken)
     {
+        var cacheKey = CacheKeys.Analytics(request.UrlId);
+
+        var cached =
+            await _cache.GetAsync<UrlAnalyticsResponse>(cacheKey);
+
+        if (cached is not null)
+        {
+            return cached;
+        }
+
         var url = await _repository.GetWithVisitsAsync(
             request.UrlId,
             cancellationToken);
@@ -33,7 +48,7 @@ public sealed class GetUrlAnalyticsQueryHandler
         if (url.UserId != _currentUser.UserId)
             throw new UnauthorizedAccessException();
 
-        return new UrlAnalyticsResponse
+        var response = new UrlAnalyticsResponse
         {
             UrlId = url.Id,
             OriginalUrl = url.OriginalUrl,
@@ -73,5 +88,12 @@ public sealed class GetUrlAnalyticsQueryHandler
                 })
                 .ToList()
         };
+
+        await _cache.SetAsync(
+            cacheKey,
+            response,
+            TimeSpan.FromMinutes(5));
+
+        return response;
     }
 }

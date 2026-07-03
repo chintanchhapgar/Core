@@ -1,7 +1,9 @@
 ﻿using UrlShortener.Application.Abstractions.Authentication;
+using UrlShortener.Application.Abstractions.Caching;
 using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
 using UrlShortener.Application.Abstractions.Services;
+using UrlShortener.Application.Common.Caching;
 using UrlShortener.Application.Features.Urls.DTOs;
 using UrlShortener.Domain.Entities;
 
@@ -13,18 +15,26 @@ public sealed class CreateShortUrlCommandHandler
     private readonly IShortUrlRepository _repository;
     private readonly IShortCodeGenerator _generator;
     private readonly ICurrentUser _currentUser;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ICacheService _cache;
+
     public CreateShortUrlCommandHandler(
-    IShortUrlRepository repository,
-    IShortCodeGenerator generator,
-    ICurrentUser currentUser)
+        IShortUrlRepository repository,
+        IShortCodeGenerator generator,
+        ICurrentUser currentUser,
+        IUnitOfWork unitOfWork,
+        ICacheService cache)
     {
         _repository = repository;
         _generator = generator;
         _currentUser = currentUser;
+        _unitOfWork = unitOfWork;
+        _cache = cache;
     }
+
     public async Task<ShortUrlDto> Handle(
-    CreateShortUrlCommand request,
-    CancellationToken cancellationToken)
+        CreateShortUrlCommand request,
+        CancellationToken cancellationToken)
     {
         string shortCode;
 
@@ -55,6 +65,14 @@ public sealed class CreateShortUrlCommandHandler
         entity.SetExpiration(request.ExpiresOnUtc);
 
         await _repository.AddAsync(entity, cancellationToken);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        // Invalidate dashboard statistics
+        await CacheInvalidation.InvalidateUrlAsync(
+            _cache,
+            entity.Id,
+            entity.ShortCode);
 
         return new ShortUrlDto
         {

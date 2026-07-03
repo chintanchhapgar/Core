@@ -1,48 +1,46 @@
-﻿using UrlShortener.Application.Abstractions.Messaging;
+﻿using UrlShortener.Application.Abstractions.Caching;
+using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
-
-namespace UrlShortener.Application.Features.Admin.Dashboard;
+using UrlShortener.Application.Common.Caching;
+using UrlShortener.Application.Features.Admin.Dashboard;
 
 public sealed class GetDashboardQueryHandler
     : IQueryHandler<GetDashboardQuery, DashboardResponse>
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IShortUrlRepository _shortUrlRepository;
+    private readonly IShortUrlRepository _repository;
+    private readonly ICacheService _cache;
 
     public GetDashboardQueryHandler(
-        IUserRepository userRepository,
-        IShortUrlRepository shortUrlRepository)
+        IShortUrlRepository repository,
+        ICacheService cache)
     {
-        _userRepository = userRepository;
-        _shortUrlRepository = shortUrlRepository;
+        _repository = repository;
+        _cache = cache;
     }
 
     public async Task<DashboardResponse> Handle(
         GetDashboardQuery request,
         CancellationToken cancellationToken)
     {
-        var totalUsers = await _userRepository.CountAsync(
-            cancellationToken);
+        var cached = await _cache.GetAsync<DashboardResponse>(
+            CacheKeys.Dashboard);
 
-        var totalUrls = await _shortUrlRepository.CountAsync(
-            cancellationToken);
+        if (cached is not null)
+            return cached;
 
-        var activeUrls = await _shortUrlRepository.CountActiveAsync(
-            cancellationToken);
-
-        var expiredUrls = await _shortUrlRepository.CountExpiredAsync(
-            cancellationToken);
-
-        var totalClicks = await _shortUrlRepository.TotalClicksAsync(
-            cancellationToken);
-
-        return new DashboardResponse
+        var response = new DashboardResponse
         {
-            TotalUsers = totalUsers,
-            TotalUrls = totalUrls,
-            ActiveUrls = activeUrls,
-            ExpiredUrls = expiredUrls,
-            TotalClicks = totalClicks
+            TotalUrls = await _repository.CountAsync(cancellationToken),
+            ActiveUrls = await _repository.CountActiveAsync(cancellationToken),
+            ExpiredUrls = await _repository.CountExpiredAsync(cancellationToken),
+            TotalClicks = await _repository.TotalClicksAsync(cancellationToken)
         };
+
+        await _cache.SetAsync(
+            CacheKeys.Dashboard,
+            response,
+            TimeSpan.FromMinutes(5));
+
+        return response;
     }
 }

@@ -4,10 +4,12 @@ using Microsoft.OpenApi;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using UrlShortener.Api.Exceptions;
+using UrlShortener.Application.Abstractions.Caching;
 using UrlShortener.Application.DependencyInjection;
 using UrlShortener.Infrastructure.Authentication;
 using UrlShortener.Infrastructure.DependencyInjection;
 using UrlShortener.Persistence.DependencyInjection;
+using UrlShortener.Persistence.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +51,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddProblemDetails();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<ICacheService, MemoryCacheService>();
 
 var jwt = builder.Configuration
     .GetSection(JwtSettings.SectionName)

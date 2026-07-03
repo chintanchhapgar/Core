@@ -1,6 +1,7 @@
-﻿using UrlShortener.Application.Abstractions.Messaging;
+﻿using UrlShortener.Application.Abstractions.Caching;
+using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
-using UrlShortener.Application.Abstractions.Services;
+using UrlShortener.Application.Common.Caching;
 using UrlShortener.Domain.Entities;
 
 namespace UrlShortener.Application.Features.Urls.Commands.ResolveShortUrl;
@@ -9,61 +10,80 @@ public sealed class ResolveShortUrlCommandHandler
     : ICommandHandler<ResolveShortUrlCommand, string?>
 {
     private readonly IShortUrlRepository _repository;
-    private readonly IRequestInfoProvider _requestInfoProvider;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ICacheService _cache;
 
     public ResolveShortUrlCommandHandler(
         IShortUrlRepository repository,
-        IRequestInfoProvider requestInfoProvider)
+        IUnitOfWork unitOfWork,
+        ICacheService cache)
     {
         _repository = repository;
-        _requestInfoProvider = requestInfoProvider;
+        _unitOfWork = unitOfWork;
+        _cache = cache;
     }
 
     public async Task<string?> Handle(
         ResolveShortUrlCommand request,
         CancellationToken cancellationToken)
     {
-        var entity = await _repository.GetByShortCodeAsync(
-            request.ShortCode,
+        var cacheKey = CacheKeys.Url(request.ShortCode);
+
+        var cached = await _cache.GetAsync<CachedShortUrl>(cacheKey);
+
+        if (cached is null)
+        {
+            var entity = await _repository.GetByShortCodeAsync(
+                request.ShortCode,
+                cancellationToken);
+
+            if (entity is null)
+                return null;
+
+            if (!entity.IsActive || entity.IsExpired())
+                return null;
+
+            cached = new CachedShortUrl
+            {
+                Id = entity.Id,
+                OriginalUrl = entity.OriginalUrl,
+                ShortCode = entity.ShortCode,
+                IsActive = entity.IsActive,
+                ExpiresOnUtc = entity.ExpiresOnUtc
+            };
+
+            await _cache.SetAsync(
+                cacheKey,
+                cached,
+                TimeSpan.FromMinutes(30));
+        }
+
+        var shortUrl = await _repository.GetByIdAsync(
+            cached.Id,
             cancellationToken);
 
-        if (entity is null)
+        if (shortUrl is null)
             return null;
 
-        // Prevent redirect if disabled
-        if (!entity.IsActive)
-        {
-            throw new InvalidOperationException(
-                "This short URL has been deactivated.");
-        }
-
-        // Prevent redirect if expired
-        if (entity.IsExpired())
-        {
-            throw new InvalidOperationException(
-                "This short URL has expired.");
-        }
-
-        entity.RegisterClick();
-
-        var requestInfo = _requestInfoProvider.GetCurrentRequest();
-
-        var visit = new ShortUrlVisit(
-            entity.Id,
-            requestInfo.IpAddress,
-            requestInfo.UserAgent,
-            requestInfo.Browser,
-            requestInfo.OperatingSystem,
-            requestInfo.Referrer);
-
-        _repository.Update(entity);
+        shortUrl.RegisterClick();
 
         await _repository.AddVisitAsync(
-            visit,
+            new ShortUrlVisit(
+                shortUrl.Id,
+                null,
+                null,
+                null,
+                null,
+                null),
             cancellationToken);
 
-        // TransactionBehavior will call SaveChangesAsync()
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return entity.OriginalUrl;
+        // Invalidate caches affected by a new visit
+        await CacheInvalidation.InvalidateAnalyticsAsync(
+            _cache,
+            shortUrl.Id);
+
+        return cached.OriginalUrl;
     }
 }
