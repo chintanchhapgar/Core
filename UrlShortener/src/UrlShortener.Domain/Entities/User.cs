@@ -15,6 +15,8 @@ public sealed class User : AuditableEntity
 
     public string Role { get; private set; } = Roles.User;
 
+    public bool IsActive { get; private set; } = true;
+
     public bool IsLocked { get; private set; }
 
     public ICollection<ShortUrl> ShortUrls { get; private set; }
@@ -51,6 +53,16 @@ public sealed class User : AuditableEntity
             throw new InvalidOperationException("Invalid role.");
 
         Role = role;
+    }
+
+    public void Activate()
+    {
+        IsActive = true;
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
     }
 
     public void Lock()

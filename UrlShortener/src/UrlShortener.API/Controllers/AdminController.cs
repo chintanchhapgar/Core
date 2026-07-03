@@ -3,8 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Application.Common.Responses;
 using UrlShortener.Application.Features.Admin.Dashboard;
+using UrlShortener.Application.Features.Admin.Users.ActivateUser;
+using UrlShortener.Application.Features.Admin.Users.DeactivateUser;
 using UrlShortener.Application.Features.Admin.Users.GetUser;
 using UrlShortener.Application.Features.Admin.Users.GetUsers;
+using UrlShortener.Application.Features.Admin.Users.LockUser;
+using UrlShortener.Application.Features.Admin.Users.UnlockUser;
 using UrlShortener.Application.Features.Admin.Users.UpdateRole;
 using UrlShortener.Domain.Constants;
 
@@ -70,6 +74,70 @@ public sealed class AdminController : ControllerBase
         {
             Success = true,
             Message = "User role updated successfully."
+        });
+    }
+
+    [HttpPut("users/{id:guid}/lock")]
+    public async Task<IActionResult> LockUser(
+    Guid id,
+    CancellationToken cancellationToken)
+    {
+        await _mediator.Send(
+            new LockUserCommand(id),
+            cancellationToken);
+
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "User locked successfully."
+        });
+    }
+
+    [HttpPut("users/{id:guid}/unlock")]
+    public async Task<IActionResult> UnlockUser(
+    Guid id,
+    CancellationToken cancellationToken)
+    {
+        await _mediator.Send(
+            new UnlockUserCommand(id),
+            cancellationToken);
+
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "User unlocked successfully."
+        });
+    }
+
+    [HttpPut("users/{id:guid}/activate")]
+    public async Task<IActionResult> ActivateUser(
+    Guid id,
+    CancellationToken cancellationToken)
+    {
+        await _mediator.Send(
+            new ActivateUserCommand(id),
+            cancellationToken);
+
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "User activated successfully."
+        });
+    }
+
+    [HttpPut("users/{id:guid}/deactivate")]
+    public async Task<IActionResult> DeactivateUser(
+    Guid id,
+    CancellationToken cancellationToken)
+    {
+        await _mediator.Send(
+            new DeactivateUserCommand(id),
+            cancellationToken);
+
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "User deactivated successfully."
         });
     }
 }

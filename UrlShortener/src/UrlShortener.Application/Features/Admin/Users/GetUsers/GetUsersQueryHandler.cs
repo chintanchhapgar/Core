@@ -27,7 +27,12 @@ public sealed class GetUsersQueryHandler
             FirstName = x.FirstName,
             LastName = x.LastName,
             Email = x.Email,
-            UrlCount = x.UrlCount
+            Role = x.Role,
+            UrlCount = x.UrlCount,
+            IsActive = x.IsActive,
+            IsLocked = x.IsLocked,
+            CreatedOnUtc = x.CreatedOnUtc,
+            UpdatedOnUtc = x.UpdatedOnUtc
         }).ToList();
     }
 }

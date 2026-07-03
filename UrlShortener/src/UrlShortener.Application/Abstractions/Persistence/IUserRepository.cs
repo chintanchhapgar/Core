@@ -1,4 +1,4 @@
-﻿using UrlShortener.Application.Common.Models;
+﻿
 using UrlShortener.Domain.Entities;
 
 namespace UrlShortener.Application.Abstractions.Persistence;

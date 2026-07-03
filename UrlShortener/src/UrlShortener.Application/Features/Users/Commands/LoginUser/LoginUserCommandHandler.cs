@@ -37,6 +37,14 @@ public sealed class LoginUserCommandHandler
                 "Invalid email or password.");
         }
 
+        if (!user.IsActive)
+            throw new UnauthorizedAccessException(
+                "Your account has been deactivated.");
+
+        if (user.IsLocked)
+            throw new UnauthorizedAccessException(
+                "Your account has been locked.");
+
         var isPasswordValid = _passwordHasher.Verify(
             request.Password,
             user.PasswordHash);

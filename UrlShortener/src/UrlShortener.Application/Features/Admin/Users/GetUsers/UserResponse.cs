@@ -10,5 +10,15 @@ public sealed class UserResponse
 
     public string Email { get; init; } = string.Empty;
 
+    public string Role { get; init; } = string.Empty;
+
     public int UrlCount { get; init; }
+
+    public bool IsActive { get; init; }
+
+    public bool IsLocked { get; init; }
+
+    public DateTime CreatedOnUtc { get; init; }
+
+    public DateTime? UpdatedOnUtc { get; init; }
 }

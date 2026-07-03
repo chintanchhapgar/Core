@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UrlShortener.Application.Abstractions.Persistence;
-using UrlShortener.Application.Common.Models;
 using UrlShortener.Domain.Entities;
 using UrlShortener.Persistence.Context;
 
@@ -91,7 +90,12 @@ public sealed class UserRepository : IUserRepository
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 Email = u.Email,
-                UrlCount = _context.ShortUrls.Count(s => s.UserId == u.Id)
+                Role = u.Role,
+                UrlCount = _context.ShortUrls.Count(s => s.UserId == u.Id),
+                IsActive = u.IsActive,
+                IsLocked = u.IsLocked,
+                CreatedOnUtc = u.CreatedOnUtc,
+                UpdatedOnUtc = u.UpdatedOnUtc
             })
             .OrderBy(x => x.FirstName)
             .ThenBy(x => x.LastName)
