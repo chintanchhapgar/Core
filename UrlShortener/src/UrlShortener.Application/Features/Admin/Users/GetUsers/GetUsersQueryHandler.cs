@@ -1,38 +1,27 @@
 ﻿using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Common.Models;
+using UrlShortener.Persistence.Common.Models;
 
 namespace UrlShortener.Application.Features.Admin.Users.GetUsers;
 
 public sealed class GetUsersQueryHandler
-    : IQueryHandler<GetUsersQuery, IReadOnlyList<UserResponse>>
+    : IQueryHandler<GetUsersQuery, PagedResponse<UserResponse>>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUserRepository _repository;
 
     public GetUsersQueryHandler(
-        IUserRepository userRepository)
+        IUserRepository repository)
     {
-        _userRepository = userRepository;
+        _repository = repository;
     }
 
-    public async Task<IReadOnlyList<UserResponse>> Handle(
-        GetUsersQuery request,
-        CancellationToken cancellationToken)
+    public Task<PagedResponse<UserResponse>> Handle(
+     GetUsersQuery request,
+     CancellationToken cancellationToken)
     {
-        var users = await _userRepository
-            .GetUsersWithUrlCountAsync(cancellationToken);
-
-        return users.Select(x => new UserResponse
-        {
-            Id = x.Id,
-            FirstName = x.FirstName,
-            LastName = x.LastName,
-            Email = x.Email,
-            Role = x.Role,
-            UrlCount = x.UrlCount,
-            IsActive = x.IsActive,
-            IsLocked = x.IsLocked,
-            CreatedOnUtc = x.CreatedOnUtc,
-            UpdatedOnUtc = x.UpdatedOnUtc
-        }).ToList();
+        return _repository.GetPagedAsync(
+            request,
+            cancellationToken);
     }
 }

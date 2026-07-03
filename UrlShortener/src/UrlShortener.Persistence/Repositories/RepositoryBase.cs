@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using UrlShortener.Application.Common.Models;
 using UrlShortener.Domain.Common;
+using UrlShortener.Persistence.Common.Models;
 using UrlShortener.Persistence.Context;
 
 namespace UrlShortener.Persistence.Repositories;
@@ -17,29 +20,41 @@ public abstract class RepositoryBase<TEntity>
         DbSet = context.Set<TEntity>();
     }
 
-    public virtual async Task AddAsync(
-        TEntity entity,
+    protected IQueryable<TEntity> Query(bool tracking = false)
+    {
+        return tracking
+            ? DbSet
+            : DbSet.AsNoTracking();
+    }
+
+    protected async Task<PagedResponse<TResult>> GetPagedAsync<TResult>(
+         IQueryable<TEntity> query,
+        Expression<Func<TEntity, TResult>> selector,
+        int pageNumber,
+        int pageSize,
         CancellationToken cancellationToken = default)
     {
-        await DbSet.AddAsync(entity, cancellationToken);
-    }
+        pageNumber = Math.Max(pageNumber, 1);
+        pageSize = Math.Clamp(pageSize, 1, 100);
 
-    public virtual void Update(TEntity entity)
-    {
-        DbSet.Update(entity);
-    }
+        var totalRecords = await query.CountAsync(cancellationToken);
 
-    public virtual void Remove(TEntity entity)
-    {
-        DbSet.Remove(entity);
-    }
+        var items = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(selector)
+            .ToListAsync(cancellationToken);
 
-    public virtual async Task<TEntity?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default)
-    {
-        return await DbSet.FirstOrDefaultAsync(
-            x => x.Id == id,
-            cancellationToken);
+        return new PagedResponse<TResult>
+        {
+            Items = items,
+            Pagination = new PaginationMetadata
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalRecords = totalRecords,
+                TotalPages = (int)Math.Ceiling(totalRecords / (double)pageSize)
+            }
+        };
     }
 }

@@ -7,6 +7,7 @@ using UrlShortener.Application.Features.Urls.Commands.CreateShortUrl;
 using UrlShortener.Application.Features.Urls.Commands.DeactivateUrl;
 using UrlShortener.Application.Features.Urls.Commands.DeleteUrl;
 using UrlShortener.Application.Features.Urls.Commands.UpdateUrl;
+using UrlShortener.Application.Features.Urls.GetUrls;
 using UrlShortener.Application.Features.Urls.Queries.Analytics;
 using UrlShortener.Application.Features.Urls.Queries.GetUrls;
 
@@ -41,13 +42,12 @@ public class UrlsController : ControllerBase
 
     [HttpGet]
     public async Task<IActionResult> GetUrls(
-        CancellationToken cancellationToken)
+     [FromQuery] GetUrlsQuery query,
+     CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(
-            new GetUrlsQuery(),
-            cancellationToken);
-
-        return Ok(response);
+        return Ok(await _mediator.Send(
+            query,
+            cancellationToken));
     }
 
     //[HttpGet("{id:guid}")]

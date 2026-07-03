@@ -1,40 +1,36 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using UrlShortener.Application.Features.Urls.GetUrls;
+using UrlShortener.Application.Features.Urls.Queries.GetUrls;
 using UrlShortener.Domain.Entities;
+using UrlShortener.Persistence.Common.Models;
 
 namespace UrlShortener.Application.Abstractions.Persistence;
 
 public interface IShortUrlRepository
 {
     Task<ShortUrl?> GetByIdAsync(
-       Guid id,
-       CancellationToken cancellationToken = default);
+        Guid id,
+        CancellationToken cancellationToken = default);
 
     Task<ShortUrl?> GetByShortCodeAsync(
         string shortCode,
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<ShortUrl>> GetUrlsByUserIdAsync(
-    Guid? userId,
-    CancellationToken cancellationToken);
+        Guid? userId,
+        CancellationToken cancellationToken = default);
 
     Task<ShortUrl?> GetByIdAndUserAsync(
-    Guid id,
-    Guid userId,
-    CancellationToken cancellationToken = default);
-
-    Task AddVisitAsync(
-    ShortUrlVisit visit,
-    CancellationToken cancellationToken);
+        Guid id,
+        Guid userId,
+        CancellationToken cancellationToken = default);
 
     Task<ShortUrl?> GetWithVisitsAsync(
-    Guid id,
-    CancellationToken cancellationToken = default);
+        Guid id,
+        CancellationToken cancellationToken = default);
+
+    Task AddVisitAsync(
+        ShortUrlVisit visit,
+        CancellationToken cancellationToken = default);
 
     Task AddAsync(
         ShortUrl entity,
@@ -45,7 +41,7 @@ public interface IShortUrlRepository
     void Remove(ShortUrl entity);
 
     Task<int> CountAsync(
-    CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default);
 
     Task<int> CountActiveAsync(
         CancellationToken cancellationToken = default);
@@ -57,18 +53,22 @@ public interface IShortUrlRepository
         CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<ShortUrl>> GetAllAsync(
-    CancellationToken cancellationToken = default);
-
-    void Delete(ShortUrl shortUrl);
+        CancellationToken cancellationToken = default);
 
     Task<ShortUrl?> GetAccessibleUrlAsync(
-     Guid id,
-     bool isAdmin,
-     Guid? userId,
-     CancellationToken cancellationToken = default);
+        Guid id,
+        bool isAdmin,
+        Guid? userId,
+        CancellationToken cancellationToken = default);
 
     Task<IReadOnlyList<ShortUrl>> GetAccessibleUrlsAsync(
         bool isAdmin,
         Guid? userId,
         CancellationToken cancellationToken = default);
+
+    Task<PagedResponse<UrlResponse>> GetPagedAccessibleUrlsAsync(
+    GetUrlsQuery request,
+    bool isAdmin,
+    Guid? userId,
+    CancellationToken cancellationToken = default);
 }

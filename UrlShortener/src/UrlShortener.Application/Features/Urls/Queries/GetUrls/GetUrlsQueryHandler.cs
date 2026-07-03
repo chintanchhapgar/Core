@@ -2,11 +2,13 @@
 using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
 using UrlShortener.Application.Abstractions.Services;
+using UrlShortener.Application.Features.Urls.GetUrls;
+using UrlShortener.Persistence.Common.Models;
 
 namespace UrlShortener.Application.Features.Urls.Queries.GetUrls;
 
 public sealed class GetUrlsQueryHandler
-    : IQueryHandler<GetUrlsQuery, IReadOnlyList<UrlResponse>>
+	: IQueryHandler<GetUrlsQuery, PagedResponse<UrlResponse>>
 {
     private readonly ICurrentUser _currentUser;
     private readonly IShortUrlRepository _repository;
@@ -19,24 +21,14 @@ public sealed class GetUrlsQueryHandler
         _repository = repository;
     }
 
-    public async Task<IReadOnlyList<UrlResponse>> Handle(
-        GetUrlsQuery request,
-        CancellationToken cancellationToken)
-    {
-        var urls = await _repository.GetAccessibleUrlsAsync(
-            _currentUser.IsAdmin,
-            _currentUser.UserId,
-            cancellationToken);
-
-        return urls.Select(x => new UrlResponse
-        {
-            Id = x.Id,
-            OriginalUrl = x.OriginalUrl,
-            ShortCode = x.ShortCode,
-            ClickCount = x.ClickCount,
-            IsActive = x.IsActive,
-            CreatedOnUtc = x.CreatedOnUtc,
-            ExpiresOnUtc = x.ExpiresOnUtc
-        }).ToList();
-    }
+	public async Task<PagedResponse<UrlResponse>> Handle(
+	GetUrlsQuery request,
+	CancellationToken cancellationToken)
+	{
+		return await _repository.GetPagedAccessibleUrlsAsync(
+			request,
+			_currentUser.IsAdmin,
+			_currentUser.UserId,
+			cancellationToken);
+	}
 }

@@ -37,13 +37,12 @@ public sealed class AdminController : ControllerBase
 
     [HttpGet("users")]
     public async Task<IActionResult> GetUsers(
-     CancellationToken cancellationToken)
+    [FromQuery] GetUsersQuery query,
+    CancellationToken cancellationToken)
     {
-        var response = await _mediator.Send(
-            new GetUsersQuery(),
-            cancellationToken);
-
-        return Ok(response);
+        return Ok(await _mediator.Send(
+            query,
+            cancellationToken));
     }
 
     [HttpGet("users/{id:guid}")]

@@ -1,5 +1,7 @@
 ﻿
+using UrlShortener.Application.Features.Admin.Users.GetUsers;
 using UrlShortener.Domain.Entities;
+using UrlShortener.Persistence.Common.Models;
 
 namespace UrlShortener.Application.Abstractions.Persistence;
 
@@ -35,4 +37,8 @@ public interface IUserRepository
         CancellationToken cancellationToken = default);
 
     void Update(User user);
+
+    Task<PagedResponse<UserResponse>> GetPagedAsync(
+    GetUsersQuery request,
+    CancellationToken cancellationToken = default);
 }

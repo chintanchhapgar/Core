@@ -37,7 +37,7 @@ public sealed class DeleteUrlCommandHandler
             throw new KeyNotFoundException("Short URL not found.");
 
 
-        _repository.Delete(url);
+        _repository.Remove(url);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
