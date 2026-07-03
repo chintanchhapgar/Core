@@ -1,6 +1,7 @@
 ﻿using UrlShortener.Application.Abstractions.Authentication;
 using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Abstractions.Services;
 using UrlShortener.Application.Common.Extensions;
 
 namespace UrlShortener.Application.Features.Urls.Commands.DeleteUrl;
@@ -9,12 +10,12 @@ public sealed class DeleteUrlCommandHandler
     : ICommandHandler<DeleteUrlCommand>
 {
     private readonly IShortUrlRepository _repository;
-    private readonly ICurrentUserService _currentUser;
+    private readonly ICurrentUser _currentUser;
     private readonly IUnitOfWork _unitOfWork;   
 
     public DeleteUrlCommandHandler(
         IShortUrlRepository repository,
-        ICurrentUserService currentUser,
+        ICurrentUser currentUser,
         IUnitOfWork unitOfWork)
     {
         _repository = repository;

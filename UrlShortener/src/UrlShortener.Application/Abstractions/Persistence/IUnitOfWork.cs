@@ -1,9 +1,11 @@
-﻿namespace UrlShortener.Application.Abstractions.Persistence;
+﻿using System;
 
-public interface IUnitOfWork
+namespace UrlShortener.Application.Abstractions.Persistence;
+
+public interface IUnitOfWork : IDisposable
 {
     Task<int> SaveChangesAsync(
-       CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default);
 
     Task BeginTransactionAsync(
         CancellationToken cancellationToken = default);

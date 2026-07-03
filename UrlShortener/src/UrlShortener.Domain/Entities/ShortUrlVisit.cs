@@ -1,8 +1,9 @@
-﻿namespace UrlShortener.Domain.Entities;
+﻿using UrlShortener.Domain.Common;
 
-public sealed class ShortUrlVisit
+namespace UrlShortener.Domain.Entities;
+
+public sealed class ShortUrlVisit : AuditableEntity
 {
-    public Guid Id { get; private set; }
 
     public Guid ShortUrlId { get; private set; }
 

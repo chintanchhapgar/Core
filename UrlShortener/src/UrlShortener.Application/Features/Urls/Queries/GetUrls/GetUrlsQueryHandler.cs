@@ -1,17 +1,18 @@
 ﻿using UrlShortener.Application.Abstractions.Authentication;
 using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Abstractions.Services;
 
 namespace UrlShortener.Application.Features.Urls.Queries.GetUrls;
 
 public sealed class GetUrlsQueryHandler
     : IQueryHandler<GetUrlsQuery, IReadOnlyList<UrlResponse>>
 {
-    private readonly ICurrentUserService _currentUser;
+    private readonly ICurrentUser _currentUser;
     private readonly IShortUrlRepository _repository;
 
     public GetUrlsQueryHandler(
-        ICurrentUserService currentUser,
+        ICurrentUser currentUser,
         IShortUrlRepository repository)
     {
         _currentUser = currentUser;

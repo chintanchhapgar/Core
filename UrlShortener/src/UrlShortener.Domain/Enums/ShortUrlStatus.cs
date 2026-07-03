@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace UrlShortener.Domain.Constants;
 
-namespace UrlShortener.Domain.Enums;
-
-public enum ShortUrlStatus
+public static class Roles
 {
-    Active = 1,
-    Disabled = 2,
-    Expired = 3
+    public const string Admin = "Admin";
+
+    public const string User = "User";
 }

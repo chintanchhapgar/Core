@@ -17,7 +17,7 @@ public static class InfrastructureServiceRegistration
     {
         services.AddHttpContextAccessor();
 
-        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<ICurrentUser, CurrentUserService>();
 
         services.AddScoped<IRequestInfoProvider, RequestInfoProvider>();
 

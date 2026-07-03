@@ -1,14 +1,16 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using UrlShortener.Application.Abstractions.Authentication;
+using UrlShortener.Application.Abstractions.Services;
+using UrlShortener.Domain.Constants;
 
-namespace UrlShortener.Infrastructure.Authentication;
+namespace UrlShortener.Infrastructure.Services;
 
-public sealed class CurrentUserService : ICurrentUserService
+public sealed class CurrentUserService : ICurrentUser
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public CurrentUserService(IHttpContextAccessor httpContextAccessor)
+    public CurrentUserService(
+        IHttpContextAccessor httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
     }
@@ -17,16 +19,22 @@ public sealed class CurrentUserService : ICurrentUserService
     {
         get
         {
-            var id = _httpContextAccessor.HttpContext?
-                .User
+            var value = _httpContextAccessor
+                .HttpContext?
+                .User?
                 .FindFirstValue(ClaimTypes.NameIdentifier);
 
-            return Guid.TryParse(id, out var guid)
-                ? guid
+            return Guid.TryParse(value, out var id)
+                ? id
                 : null;
         }
     }
 
+    public bool IsAuthenticated =>
+        _httpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated
+        ?? false;
+
     public bool IsAdmin =>
-        _httpContextAccessor.HttpContext?.User.IsInRole("Admin") ?? false;
+        _httpContextAccessor.HttpContext?.User?.IsInRole(Roles.Admin)
+        ?? false;
 }

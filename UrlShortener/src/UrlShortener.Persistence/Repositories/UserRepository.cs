@@ -33,6 +33,11 @@ public sealed class UserRepository : IUserRepository
             cancellationToken);
     }
 
+    public void Update(User user)
+    {
+        _context.Users.Update(user);
+    }
+
     public Task<List<ShortUrl>> GetUrlsAsync(
         Guid userId,
         CancellationToken cancellationToken)

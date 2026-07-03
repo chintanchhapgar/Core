@@ -12,11 +12,11 @@ public sealed class CreateShortUrlCommandHandler
 {
     private readonly IShortUrlRepository _repository;
     private readonly IShortCodeGenerator _generator;
-    private readonly ICurrentUserService _currentUser;
+    private readonly ICurrentUser _currentUser;
     public CreateShortUrlCommandHandler(
     IShortUrlRepository repository,
     IShortCodeGenerator generator,
-    ICurrentUserService currentUser)
+    ICurrentUser currentUser)
     {
         _repository = repository;
         _generator = generator;

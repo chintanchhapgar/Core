@@ -33,4 +33,6 @@ public interface IUserRepository
 
     Task<IReadOnlyList<UserWithUrlCount>> GetUsersWithUrlCountAsync(
         CancellationToken cancellationToken = default);
+
+    void Update(User user);
 }

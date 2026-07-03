@@ -26,10 +26,12 @@ public sealed class UnitOfWork : IUnitOfWork
     }
 
     public async Task CommitTransactionAsync(
-     CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default)
     {
         if (_transaction is null)
             return;
+
+        await _context.SaveChangesAsync(cancellationToken);
 
         await _transaction.CommitAsync(cancellationToken);
 
@@ -52,7 +54,7 @@ public sealed class UnitOfWork : IUnitOfWork
     }
 
     public Task<int> SaveChangesAsync(
-    CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default)
     {
         return _context.SaveChangesAsync(cancellationToken);
     }
@@ -61,5 +63,7 @@ public sealed class UnitOfWork : IUnitOfWork
     {
         _transaction?.Dispose();
         _context.Dispose();
+
+        GC.SuppressFinalize(this);
     }
 }

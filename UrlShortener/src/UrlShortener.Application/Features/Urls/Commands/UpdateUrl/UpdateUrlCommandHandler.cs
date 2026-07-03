@@ -1,6 +1,7 @@
 ﻿using UrlShortener.Application.Abstractions.Authentication;
 using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Abstractions.Services;
 using UrlShortener.Application.Common.Extensions;
 
 namespace UrlShortener.Application.Features.Urls.Commands.UpdateUrl;
@@ -8,12 +9,12 @@ namespace UrlShortener.Application.Features.Urls.Commands.UpdateUrl;
 public sealed class UpdateUrlCommandHandler
     : ICommandHandler<UpdateUrlCommand>
 {
-    private readonly ICurrentUserService _currentUser;
+    private readonly ICurrentUser _currentUser;
     private readonly IShortUrlRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
 
     public UpdateUrlCommandHandler(
-        ICurrentUserService currentUser,
+        ICurrentUser currentUser,
         IShortUrlRepository repository,
         IUnitOfWork unitOfWork)
     {

@@ -1,9 +1,10 @@
-﻿namespace UrlShortener.Domain.Entities;
+﻿using UrlShortener.Domain.Common;
+using UrlShortener.Domain.Constants;
 
-public sealed class User
+namespace UrlShortener.Domain.Entities;
+
+public sealed class User : AuditableEntity
 {
-    public Guid Id { get; private set; }
-
     public string FirstName { get; private set; } = default!;
 
     public string LastName { get; private set; } = default!;
@@ -12,9 +13,9 @@ public sealed class User
 
     public string PasswordHash { get; private set; } = default!;
 
-    public DateTime CreatedOnUtc { get; private set; }
+    public string Role { get; private set; } = Roles.User;
 
-    public string Role { get; private set; } = "User";
+    public bool IsLocked { get; private set; }
 
     public ICollection<ShortUrl> ShortUrls { get; private set; }
         = new List<ShortUrl>();
@@ -24,16 +25,54 @@ public sealed class User
     }
 
     public User(
-    string firstName,
-    string lastName,
-    string email,
-    string passwordHash,
-    string role = "User")
+        string firstName,
+        string lastName,
+        string email,
+        string passwordHash,
+        string role = Roles.User)
     {
+        Id = Guid.NewGuid();
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         PasswordHash = passwordHash;
+
+        ChangeRole(role);
+
+        IsLocked = false;
+    }
+
+    public void ChangeRole(string role)
+    {
+        if (string.IsNullOrWhiteSpace(role))
+            throw new ArgumentException("Role is required.", nameof(role));
+
+        if (role != Roles.Admin && role != Roles.User)
+            throw new InvalidOperationException("Invalid role.");
+
         Role = role;
+    }
+
+    public void Lock()
+    {
+        IsLocked = true;
+    }
+
+    public void Unlock()
+    {
+        IsLocked = false;
+    }
+
+    public void UpdateProfile(
+        string firstName,
+        string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+
+    public void ChangePassword(string passwordHash)
+    {
+        PasswordHash = passwordHash;
     }
 }

@@ -1,11 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UrlShortener.Application.Common.Responses;
 using UrlShortener.Application.Features.Admin.Dashboard;
 using UrlShortener.Application.Features.Admin.Users.GetUser;
 using UrlShortener.Application.Features.Admin.Users.GetUsers;
+using UrlShortener.Application.Features.Admin.Users.UpdateRole;
+using UrlShortener.Domain.Constants;
 
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = Roles.Admin)]
 [ApiController]
 [Route("api/admin")]
 public sealed class AdminController : ControllerBase
@@ -51,4 +54,22 @@ public sealed class AdminController : ControllerBase
         return Ok(response);
     }
 
+    [HttpPut("users/{id:guid}/role")]
+    public async Task<IActionResult> UpdateUserRole(
+    Guid id,
+    UpdateUserRoleRequest request,
+    CancellationToken cancellationToken)
+    {
+        await _mediator.Send(
+            new UpdateUserRoleCommand(
+                id,
+                request.Role),
+            cancellationToken);
+
+        return Ok(new ApiResponse
+        {
+            Success = true,
+            Message = "User role updated successfully."
+        });
+    }
 }

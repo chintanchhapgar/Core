@@ -1,6 +1,7 @@
 ﻿using UrlShortener.Application.Abstractions.Authentication;
 using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Abstractions.Services;
 
 namespace UrlShortener.Application.Features.Urls.Queries.Analytics;
 
@@ -8,11 +9,11 @@ public sealed class GetUrlAnalyticsQueryHandler
     : IQueryHandler<GetUrlAnalyticsQuery, UrlAnalyticsResponse>
 {
     private readonly IShortUrlRepository _repository;
-    private readonly ICurrentUserService _currentUser;
+    private readonly ICurrentUser _currentUser;
 
     public GetUrlAnalyticsQueryHandler(
         IShortUrlRepository repository,
-        ICurrentUserService currentUser)
+        ICurrentUser currentUser)
     {
         _repository = repository;
         _currentUser = currentUser;

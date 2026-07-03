@@ -1,6 +1,7 @@
 ﻿using UrlShortener.Application.Abstractions.Authentication;
 using UrlShortener.Application.Abstractions.Messaging;
 using UrlShortener.Application.Abstractions.Persistence;
+using UrlShortener.Application.Abstractions.Services;
 using UrlShortener.Application.Common.Extensions;
 
 namespace UrlShortener.Application.Features.Urls.Commands.DeactivateUrl;
@@ -9,12 +10,12 @@ public sealed class DeactivateUrlCommandHandler
     : ICommandHandler<DeactivateUrlCommand>
 {
     private readonly IShortUrlRepository _repository;
-    private readonly ICurrentUserService _currentUser;
+    private readonly ICurrentUser _currentUser;
     private readonly IUnitOfWork _unitOfWork;
 
     public DeactivateUrlCommandHandler(
        IShortUrlRepository repository,
-        ICurrentUserService currentUser,
+        ICurrentUser currentUser,
         IUnitOfWork unitOfWork)
     {
         _repository = repository;

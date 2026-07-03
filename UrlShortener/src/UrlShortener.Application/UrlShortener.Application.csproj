@@ -23,7 +23,6 @@
     <Folder Include="Features\Admin\Users\LockUser\" />
     <Folder Include="Features\Admin\Users\DeleteUser\" />
     <Folder Include="Features\Admin\Users\UnlockUser\" />
-    <Folder Include="Features\Admin\Users\UpdateRole\" />
     <Folder Include="Features\Urls\Response\" />
   </ItemGroup>
 
