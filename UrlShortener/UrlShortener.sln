@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11430.68 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Persistence", "src\UrlShortener.Persistence\UrlShortener.Persistence.csproj", "{B1BB7C35-B32D-4F49-A0D1-F3BAE908D264}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Api", "src\UrlShortener.Api\UrlShortener.Api.csproj", "{C66326AB-5968-4628-B303-223E83A4AE89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.API", "src\UrlShortener.Api\UrlShortener.API.csproj", "{C66326AB-5968-4628-B303-223E83A4AE89}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
 EndProject
@@ -127,5 +127,8 @@ Global
 		{C66326AB-5968-4628-B303-223E83A4AE89} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{26CE69DB-F9C8-4F52-A8EB-F1EE40946F59} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{E09D6B2D-9F3A-4199-A5A4-B2525CD7AE22} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {28ACB8D1-9220-4AE1-8231-D3B3157ECEF2}
 	EndGlobalSection
 EndGlobal

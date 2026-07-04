@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.RateLimiting;
 using UrlShortener.Application.Features.Users.Commands.LoginUser;
 using UrlShortener.Application.Features.Users.Commands.RegisterUser;
 
-namespace UrlShortener.Api.Controllers;
+namespace UrlShortener.API.Controllers;
 
 [ApiController]
 [Route("api/auth")]
