@@ -218,4 +218,15 @@ public sealed class ShortUrlRepository
                 request.PageSize,
                 cancellationToken);
     }
+
+    public async Task<IReadOnlyList<ShortUrl>> GetExpiredActiveUrlsAsync(
+    CancellationToken cancellationToken = default)
+    {
+        return await DbSet
+            .Where(x =>
+                x.IsActive &&
+                x.ExpiresOnUtc.HasValue &&
+                x.ExpiresOnUtc <= DateTime.UtcNow)
+            .ToListAsync(cancellationToken);
+    }
 }

@@ -67,8 +67,11 @@ public interface IShortUrlRepository
         CancellationToken cancellationToken = default);
 
     Task<PagedResponse<UrlResponse>> GetPagedAccessibleUrlsAsync(
-    GetUrlsQuery request,
-    bool isAdmin,
-    Guid? userId,
-    CancellationToken cancellationToken = default);
+        GetUrlsQuery request,
+        bool isAdmin,
+        Guid? userId,
+        CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<ShortUrl>> GetExpiredActiveUrlsAsync(
+        CancellationToken cancellationToken = default);
 }

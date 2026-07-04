@@ -5,6 +5,8 @@ using UrlShortener.Application.Abstractions.Authentication;
 using UrlShortener.Application.Abstractions.Security;
 using UrlShortener.Application.Abstractions.Services;
 using UrlShortener.Infrastructure.Authentication;
+using UrlShortener.Infrastructure.BackgroundServices;
+using UrlShortener.Infrastructure.Configuration;
 using UrlShortener.Infrastructure.Services;
 
 namespace UrlShortener.Infrastructure.DependencyInjection;
@@ -28,7 +30,12 @@ public static class InfrastructureServiceRegistration
         services.Configure<JwtSettings>(
             configuration.GetSection(JwtSettings.SectionName));
 
+        services.Configure<CleanupJobOptions>(
+            configuration.GetSection(CleanupJobOptions.SectionName));
+
         services.AddSingleton<IJwtProvider, JwtProvider>();
+
+        services.AddHostedService<ExpiredUrlCleanupService>();
 
         return services;
     }
