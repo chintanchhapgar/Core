@@ -17,5 +17,9 @@ namespace UrlShortener.Application.Features.Urls.Commands.CreateShortUrl
         public string ShortUrl { get; init; } = default!;
 
         public int ClickCount { get; init; }
+
+        public DateTime? ExpiresOnUtc { get; init; }
+
+        public bool IsActive { get; init; }
     }
 }

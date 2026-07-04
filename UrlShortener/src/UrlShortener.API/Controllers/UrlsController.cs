@@ -38,7 +38,9 @@ public class UrlsController : ControllerBase
             OriginalUrl = dto.OriginalUrl,
             ShortCode = dto.ShortCode,
             ShortUrl = $"{Request.Scheme}://{Request.Host}/{dto.ShortCode}",
-            ClickCount = dto.ClickCount
+            ClickCount = dto.ClickCount,
+            ExpiresOnUtc = dto.ExpiresOnUtc,
+            IsActive = dto.IsActive
         });
     }
 
