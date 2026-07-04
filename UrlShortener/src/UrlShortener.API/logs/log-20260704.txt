@@ -1,0 +1,6 @@
+2026-07-04 10:19:24.879 +05:30 [INF] Starting UrlShortener API
+[2026-07-04 10:19:25 INF] [User:] [Correlation:] UrlShortener API started successfully.
+[2026-07-04 10:19:25 INF] [User:] [Correlation:] Environment: Development
+[2026-07-04 10:19:59 WRN] [User:Anonymous] [Correlation:82fdbacf-3946-4991-b19e-c494f01958bc] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2026-07-04 10:20:03 INF] [User:Anonymous] [Correlation:82fdbacf-3946-4991-b19e-c494f01958bc] HTTP POST /api/auth/login responded 200 in 3845.3297 ms
+[2026-07-04 10:20:48 INF] [User:5b9ea013-7e09-41d9-9a5e-5c3c2ded2017] [Correlation:89d9ec4f-844e-4d6c-8e25-77cb96a940d5] HTTP GET /api/admin/users responded 200 in 427.9721 ms
