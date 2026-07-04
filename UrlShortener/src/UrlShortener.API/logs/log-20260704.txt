@@ -4,3 +4,26 @@
 [2026-07-04 10:19:59 WRN] [User:Anonymous] [Correlation:82fdbacf-3946-4991-b19e-c494f01958bc] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
 [2026-07-04 10:20:03 INF] [User:Anonymous] [Correlation:82fdbacf-3946-4991-b19e-c494f01958bc] HTTP POST /api/auth/login responded 200 in 3845.3297 ms
 [2026-07-04 10:20:48 INF] [User:5b9ea013-7e09-41d9-9a5e-5c3c2ded2017] [Correlation:89d9ec4f-844e-4d6c-8e25-77cb96a940d5] HTTP GET /api/admin/users responded 200 in 427.9721 ms
+2026-07-04 10:51:31.571 +05:30 [INF] Starting UrlShortener API
+[2026-07-04 10:51:31 INF] [User:] [Correlation:] UrlShortener API started successfully.
+[2026-07-04 10:51:32 INF] [User:] [Correlation:] Environment: Development
+[2026-07-04 10:51:50 INF] [User:Anonymous] [Correlation:ba74327b-a0b9-4ada-a424-b82441f40464] HTTP GET /health responded 200 in 2185.4135 ms
+[2026-07-04 10:51:50 WRN] [User:Anonymous] [Correlation:775d753f-16d6-420c-9e2c-5bd46869b466] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2026-07-04 10:51:51 INF] [User:Anonymous] [Correlation:775d753f-16d6-420c-9e2c-5bd46869b466] HTTP GET /favicon.ico responded 404 in 866.0286 ms
+2026-07-04 10:53:06.112 +05:30 [INF] Starting UrlShortener API
+[2026-07-04 10:53:06 INF] [User:] [Correlation:] UrlShortener API started successfully.
+[2026-07-04 10:53:06 INF] [User:] [Correlation:] Environment: Development
+[2026-07-04 10:53:29 INF] [User:Anonymous] [Correlation:a3ee1234-00d1-4033-bb87-d300c02f0860] HTTP GET /health responded 200 in 16571.9880 ms
+2026-07-04 10:53:59.901 +05:30 [INF] Starting UrlShortener API
+[2026-07-04 10:54:00 INF] [User:] [Correlation:] UrlShortener API started successfully.
+[2026-07-04 10:54:00 INF] [User:] [Correlation:] Environment: Development
+[2026-07-04 10:54:08 INF] [User:Anonymous] [Correlation:c46195c7-59cb-483b-9d0c-cf10913f93b0] HTTP GET /health responded 200 in 2035.6994 ms
+2026-07-04 10:57:23.149 +05:30 [INF] Starting UrlShortener API
+[2026-07-04 10:57:23 INF] [User:] [Correlation:] UrlShortener API started successfully.
+[2026-07-04 10:57:23 INF] [User:] [Correlation:] Environment: Development
+[2026-07-04 10:57:43 ERR] [User:Anonymous] [Correlation:2152ba6e-5854-41d2-b817-a5bf291ef49b] Health check database with status "Unhealthy" completed after 1482.8185ms with message 'Unable to connect to the database.'
+[2026-07-04 10:57:43 ERR] [User:Anonymous] [Correlation:2152ba6e-5854-41d2-b817-a5bf291ef49b] HTTP GET /health responded 503 in 1770.4019 ms
+2026-07-04 10:58:12.174 +05:30 [INF] Starting UrlShortener API
+[2026-07-04 10:58:12 INF] [User:] [Correlation:] UrlShortener API started successfully.
+[2026-07-04 10:58:12 INF] [User:] [Correlation:] Environment: Development
+[2026-07-04 10:58:26 INF] [User:Anonymous] [Correlation:55417123-35c7-42a6-b0a5-0d6c88f8ac29] HTTP GET /health responded 200 in 1850.8822 ms

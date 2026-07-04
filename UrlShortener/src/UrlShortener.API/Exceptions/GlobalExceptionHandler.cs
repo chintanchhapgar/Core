@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using UrlShortener.Application.Common.Exceptions;
 
-namespace UrlShortener.Api.Exceptions;
+namespace UrlShortener.API.Exceptions;
 
 public sealed class GlobalExceptionHandler : IExceptionHandler
 {

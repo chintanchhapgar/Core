@@ -4,14 +4,16 @@ using Microsoft.OpenApi;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
-using UrlShortener.Api.Exceptions;
+using UrlShortener.API.Exceptions;
 using UrlShortener.API.Extensions;
+using UrlShortener.API.HealthChecks;
 using UrlShortener.API.Logging;
 using UrlShortener.Application.Abstractions.Caching;
 using UrlShortener.Application.Abstractions.Services;
 using UrlShortener.Application.DependencyInjection;
 using UrlShortener.Infrastructure.Authentication;
 using UrlShortener.Infrastructure.DependencyInjection;
+using UrlShortener.Persistence.Context;
 using UrlShortener.Persistence.DependencyInjection;
 using UrlShortener.Persistence.Services;
 
@@ -54,7 +56,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddApplication();
+
 builder.Services.AddPersistence(builder.Configuration);
+
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddProblemDetails();
@@ -62,7 +66,13 @@ builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddMemoryCache();
+
 builder.Services.AddSingleton<ICacheService, MemoryCacheService>();
+
+builder.Services.AddHealthChecks()
+    .AddCheck<DatabaseHealthCheck>("database")
+    .AddCheck<MemoryHealthCheck>("memory")
+    .AddCheck<CacheHealthCheck>("cache");
 
 var jwt = builder.Configuration
     .GetSection(JwtSettings.SectionName)
@@ -180,6 +190,8 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
+
+    app.MapApplicationHealthChecks();
 
     Log.Information("Environment: {Environment}", app.Environment.EnvironmentName);
 
