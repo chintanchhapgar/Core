@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using UrlShortener.Application.Features.Users.Commands.LoginUser;
 using UrlShortener.Application.Features.Users.Commands.RegisterUser;
 
@@ -16,6 +17,7 @@ public sealed class AuthController : ControllerBase
         _mediator = mediator;
     }
 
+    [EnableRateLimiting("register")]
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterUserCommand command)
     {
@@ -31,6 +33,7 @@ public sealed class AuthController : ControllerBase
             });
     }
 
+    [EnableRateLimiting("login")]
     [HttpPost("login")]
     public async Task<ActionResult> Login(LoginUserCommand command)
     {

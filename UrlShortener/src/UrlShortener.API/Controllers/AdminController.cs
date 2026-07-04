@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using UrlShortener.Application.Common.Responses;
 using UrlShortener.Application.Features.Admin.Dashboard;
 using UrlShortener.Application.Features.Admin.Users.ActivateUser;
@@ -13,6 +14,7 @@ using UrlShortener.Application.Features.Admin.Users.UpdateRole;
 using UrlShortener.Domain.Constants;
 
 [Authorize(Roles = Roles.Admin)]
+[EnableRateLimiting("admin")]
 [ApiController]
 [Route("api/admin")]
 public sealed class AdminController : ControllerBase

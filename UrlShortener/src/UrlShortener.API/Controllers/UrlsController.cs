@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using UrlShortener.Application.Common.Responses;
 using UrlShortener.Application.Features.Urls.Commands.ActivateUrl;
 using UrlShortener.Application.Features.Urls.Commands.CreateShortUrl;
@@ -16,6 +17,7 @@ namespace UrlShortener.API.Controllers;
 [ApiController]
 [Authorize]
 [Route("api/[controller]")]
+[EnableRateLimiting("default")]
 public class UrlsController : ControllerBase
 {
     private readonly IMediator _mediator;

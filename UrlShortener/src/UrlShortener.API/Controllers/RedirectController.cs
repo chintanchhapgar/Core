@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using UrlShortener.Application.Features.Urls.Commands.ResolveShortUrl;
 
 namespace UrlShortener.API.Controllers;
@@ -14,6 +15,7 @@ public class RedirectController : ControllerBase
         _mediator = mediator;
     }
 
+    [EnableRateLimiting("redirect")]
     [HttpGet("{shortCode}")]
     public async Task<IActionResult> RedirectToOriginal(string shortCode)
     {

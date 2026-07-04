@@ -21,6 +21,8 @@ builder.AddSerilogLogging();
 
 builder.Services.AddControllers();
 
+builder.Services.AddRateLimiting();
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
@@ -172,6 +174,8 @@ try
                 httpContext.Request.Scheme);
         };
     });
+
+    app.UseRateLimiter();
 
     app.UseAuthorization();
 
