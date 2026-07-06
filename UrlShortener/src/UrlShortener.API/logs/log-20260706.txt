@@ -1,0 +1,13 @@
+2026-07-06 10:30:47.240 +05:30 [INF] Starting UrlShortener API
+[2026-07-06 10:30:47 INF] [User:] [Correlation:] UrlShortener API started successfully.
+[2026-07-06 10:30:47 INF] [User:] [Correlation:] Environment: Development
+[2026-07-06 10:30:47 INF] [User:] [Correlation:] Expired URL cleanup service started.
+[2026-07-06 10:30:47 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:30:55 INF] [User:] [Correlation:] Deactivated 4 expired URLs.
+[2026-07-06 10:30:55 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:31:55 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:31:55 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:31:55 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:32:55 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:32:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:32:56 INF] [User:] [Correlation:] Cleanup completed.
