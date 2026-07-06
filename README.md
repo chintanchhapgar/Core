@@ -6,7 +6,7 @@
 ![Architecture](https://img.shields.io/badge/Architecture-Clean%20Architecture-blue)
 ![CQRS](https://img.shields.io/badge/Pattern-CQRS-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Build](https://github.com/<YOUR_GITHUB_USERNAME>/UrlShortener/actions/workflows/dotnet.yml/badge.svg)
+![Build](https://github.com/chintanchhapgar/Core/actions/workflows/dotnet.yml/badge.svg)
 
 A production-ready **URL Shortener REST API** built with **ASP.NET Core 8** following **Clean Architecture**, **CQRS**, and **Domain-Driven Design** principles.
 
@@ -390,4 +390,4 @@ This project is licensed under the MIT License.
 **Chintan Chhapgar**
 
 - GitHub: https://github.com/chintanchhapgar
-- LinkedIn: *[(Add your LinkedIn URL)](https://www.linkedin.com/in/chintanchhapgar)*
+- LinkedIn: https://www.linkedin.com/in/chintanchhapgar/
