@@ -11,3 +11,484 @@
 [2026-07-06 10:32:55 INF] [User:] [Correlation:] Running expired URL cleanup...
 [2026-07-06 10:32:56 INF] [User:] [Correlation:] No expired URLs found.
 [2026-07-06 10:32:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:33:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:33:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:33:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:33:57 INF] [User:Anonymous] [Correlation:158048c6-555d-42d1-a49a-3ac96cf4f18f] HTTP GET /health responded 200 in 159.6270 ms
+[2026-07-06 10:33:57 WRN] [User:Anonymous] [Correlation:b6fe62bf-417c-4ef1-a560-c4f0a521a8a9] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2026-07-06 10:33:57 INF] [User:Anonymous] [Correlation:b6fe62bf-417c-4ef1-a560-c4f0a521a8a9] HTTP GET /favicon.ico responded 404 in 298.3752 ms
+[2026-07-06 10:33:58 INF] [User:Anonymous] [Correlation:a04bfede-36dc-4e0d-b692-fe2d1c3f6317] HTTP GET /health responded 200 in 25.4024 ms
+[2026-07-06 10:34:16 INF] [User:Anonymous] [Correlation:1a33b352-ed24-4b06-8b32-f2f33b1f5990] HTTP GET /.well-known/appspecific/com.chrome.devtools.json responded 404 in 0.2013 ms
+[2026-07-06 10:34:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:34:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:34:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:35:33 INF] [User:Anonymous] [Correlation:39b32059-ece3-4cf7-b70d-5046674069ea] HTTP GET /.well-known/appspecific/com.chrome.devtools.json responded 404 in 0.0460 ms
+[2026-07-06 10:35:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:35:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:35:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:36:21 ERR] [User:Anonymous] [Correlation:28e5f9b7-fc8c-4c07-b403-bc06d309ea2e] HTTP POST /api/auth/login responded 500 in 592.7495 ms
+System.UnauthorizedAccessException: Invalid email or password.
+   at UrlShortener.Application.Features.Users.Commands.LoginUser.LoginUserCommandHandler.Handle(LoginUserCommand request, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Features\Users\Commands\LoginUser\LoginUserCommandHandler.cs:line 36
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 27
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 38
+   at UrlShortener.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\ValidationBehavior.cs:line 41
+   at UrlShortener.API.Controllers.AuthController.Login(LoginUserCommand command) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Controllers\AuthController.cs:line 40
+   at lambda_method149(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[2026-07-06 10:36:21 ERR] [User:] [Correlation:] An unhandled exception has occurred while executing the request.
+System.UnauthorizedAccessException: Invalid email or password.
+   at UrlShortener.Application.Features.Users.Commands.LoginUser.LoginUserCommandHandler.Handle(LoginUserCommand request, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Features\Users\Commands\LoginUser\LoginUserCommandHandler.cs:line 36
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 27
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 38
+   at UrlShortener.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\ValidationBehavior.cs:line 41
+   at UrlShortener.API.Controllers.AuthController.Login(LoginUserCommand command) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Controllers\AuthController.cs:line 40
+   at lambda_method149(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at UrlShortener.API.Middleware.UserContextMiddleware.Invoke(HttpContext context, ICurrentUser currentUser) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\UserContextMiddleware.cs:line 30
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at UrlShortener.API.Middleware.CorrelationIdMiddleware.Invoke(HttpContext context) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\CorrelationIdMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2026-07-06 10:36:21 ERR] [User:] [Correlation:] An unhandled exception occurred.
+System.UnauthorizedAccessException: Invalid email or password.
+   at UrlShortener.Application.Features.Users.Commands.LoginUser.LoginUserCommandHandler.Handle(LoginUserCommand request, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Features\Users\Commands\LoginUser\LoginUserCommandHandler.cs:line 36
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 27
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 38
+   at UrlShortener.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\ValidationBehavior.cs:line 41
+   at UrlShortener.API.Controllers.AuthController.Login(LoginUserCommand command) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Controllers\AuthController.cs:line 40
+   at lambda_method149(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at UrlShortener.API.Middleware.UserContextMiddleware.Invoke(HttpContext context, ICurrentUser currentUser) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\UserContextMiddleware.cs:line 30
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at UrlShortener.API.Middleware.CorrelationIdMiddleware.Invoke(HttpContext context) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\CorrelationIdMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2026-07-06 10:36:36 ERR] [User:Anonymous] [Correlation:1b6f5716-ea96-46b3-8576-e75593121ade] HTTP POST /api/auth/login responded 500 in 214.7541 ms
+System.UnauthorizedAccessException: Invalid email or password.
+   at UrlShortener.Application.Features.Users.Commands.LoginUser.LoginUserCommandHandler.Handle(LoginUserCommand request, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Features\Users\Commands\LoginUser\LoginUserCommandHandler.cs:line 36
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 27
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 38
+   at UrlShortener.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\ValidationBehavior.cs:line 41
+   at UrlShortener.API.Controllers.AuthController.Login(LoginUserCommand command) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Controllers\AuthController.cs:line 40
+   at lambda_method149(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[2026-07-06 10:36:36 ERR] [User:] [Correlation:] An unhandled exception has occurred while executing the request.
+System.UnauthorizedAccessException: Invalid email or password.
+   at UrlShortener.Application.Features.Users.Commands.LoginUser.LoginUserCommandHandler.Handle(LoginUserCommand request, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Features\Users\Commands\LoginUser\LoginUserCommandHandler.cs:line 36
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 27
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 38
+   at UrlShortener.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\ValidationBehavior.cs:line 41
+   at UrlShortener.API.Controllers.AuthController.Login(LoginUserCommand command) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Controllers\AuthController.cs:line 40
+   at lambda_method149(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at UrlShortener.API.Middleware.UserContextMiddleware.Invoke(HttpContext context, ICurrentUser currentUser) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\UserContextMiddleware.cs:line 30
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at UrlShortener.API.Middleware.CorrelationIdMiddleware.Invoke(HttpContext context) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\CorrelationIdMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2026-07-06 10:36:36 ERR] [User:] [Correlation:] An unhandled exception occurred.
+System.UnauthorizedAccessException: Invalid email or password.
+   at UrlShortener.Application.Features.Users.Commands.LoginUser.LoginUserCommandHandler.Handle(LoginUserCommand request, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Features\Users\Commands\LoginUser\LoginUserCommandHandler.cs:line 36
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 27
+   at UrlShortener.Application.Behaviors.TransactionBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\TransactionBehavior.cs:line 38
+   at UrlShortener.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\ValidationBehavior.cs:line 41
+   at UrlShortener.API.Controllers.AuthController.Login(LoginUserCommand command) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Controllers\AuthController.cs:line 40
+   at lambda_method149(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at UrlShortener.API.Middleware.UserContextMiddleware.Invoke(HttpContext context, ICurrentUser currentUser) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\UserContextMiddleware.cs:line 30
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at UrlShortener.API.Middleware.CorrelationIdMiddleware.Invoke(HttpContext context) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\CorrelationIdMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2026-07-06 10:36:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:36:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:36:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:37:50 INF] [User:Anonymous] [Correlation:2639ffca-f7f0-4d7d-a4ed-ff542160a4ff] HTTP POST /api/auth/login responded 200 in 1415.9827 ms
+[2026-07-06 10:37:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:37:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:37:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:38:10 INF] [User:5b9ea013-7e09-41d9-9a5e-5c3c2ded2017] [Correlation:ca6429f8-d4e5-4995-b9f6-513fa3b4b55d] HTTP GET /api/Urls responded 200 in 302.1976 ms
+[2026-07-06 10:38:32 ERR] [User:5b9ea013-7e09-41d9-9a5e-5c3c2ded2017] [Correlation:007351cb-6946-42b5-8efd-dcd2c3556eb8] HTTP GET /api/Urls/36909d62-52a2-4f07-bde3-74f2d116b5e2/analytics responded 500 in 326.2362 ms
+System.UnauthorizedAccessException: Attempted to perform an unauthorized operation.
+   at UrlShortener.Application.Features.Urls.Queries.Analytics.GetUrlAnalyticsQueryHandler.Handle(GetUrlAnalyticsQuery request, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Features\Urls\Queries\Analytics\GetUrlAnalyticsQueryHandler.cs:line 49
+   at UrlShortener.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\ValidationBehavior.cs:line 24
+   at UrlShortener.API.Controllers.UrlsController.GetAnalytics(Guid id, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Controllers\UrlsController.cs:line 142
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[2026-07-06 10:38:32 ERR] [User:] [Correlation:] An unhandled exception has occurred while executing the request.
+System.UnauthorizedAccessException: Attempted to perform an unauthorized operation.
+   at UrlShortener.Application.Features.Urls.Queries.Analytics.GetUrlAnalyticsQueryHandler.Handle(GetUrlAnalyticsQuery request, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Features\Urls\Queries\Analytics\GetUrlAnalyticsQueryHandler.cs:line 49
+   at UrlShortener.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\ValidationBehavior.cs:line 24
+   at UrlShortener.API.Controllers.UrlsController.GetAnalytics(Guid id, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Controllers\UrlsController.cs:line 142
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at UrlShortener.API.Middleware.UserContextMiddleware.Invoke(HttpContext context, ICurrentUser currentUser) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\UserContextMiddleware.cs:line 30
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at UrlShortener.API.Middleware.CorrelationIdMiddleware.Invoke(HttpContext context) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\CorrelationIdMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2026-07-06 10:38:32 ERR] [User:] [Correlation:] An unhandled exception occurred.
+System.UnauthorizedAccessException: Attempted to perform an unauthorized operation.
+   at UrlShortener.Application.Features.Urls.Queries.Analytics.GetUrlAnalyticsQueryHandler.Handle(GetUrlAnalyticsQuery request, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Features\Urls\Queries\Analytics\GetUrlAnalyticsQueryHandler.cs:line 49
+   at UrlShortener.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.Application\Behaviors\ValidationBehavior.cs:line 24
+   at UrlShortener.API.Controllers.UrlsController.GetAnalytics(Guid id, CancellationToken cancellationToken) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Controllers\UrlsController.cs:line 142
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at UrlShortener.API.Middleware.UserContextMiddleware.Invoke(HttpContext context, ICurrentUser currentUser) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\UserContextMiddleware.cs:line 30
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at UrlShortener.API.Middleware.CorrelationIdMiddleware.Invoke(HttpContext context) in D:\Projects\Core\UrlShortener\src\UrlShortener.API\Middleware\CorrelationIdMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2026-07-06 10:38:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:38:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:38:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:39:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:39:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:39:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:39:57 INF] [User:5b9ea013-7e09-41d9-9a5e-5c3c2ded2017] [Correlation:9d658d93-15c5-46f6-b8d4-3ae3a26ffdb3] HTTP GET /api/Urls/DFFB4CE0-7255-4AE7-A8BA-4F730972F6CA/analytics responded 200 in 182.1262 ms
+[2026-07-06 10:40:13 INF] [User:Anonymous] [Correlation:edffccb4-7d8a-489c-8ff8-a6690d2d6555] HTTP GET /api/Urls/DFFB4CE0-7255-4AE7-A8BA-4F730972F6CA/analytics responded 401 in 18.6387 ms
+[2026-07-06 10:40:14 INF] [User:Anonymous] [Correlation:56ee5efe-f31d-4aa8-878a-1b357c5ba704] HTTP GET /api/Urls/DFFB4CE0-7255-4AE7-A8BA-4F730972F6CA/analytics responded 401 in 0.8464 ms
+[2026-07-06 10:40:51 INF] [User:Anonymous] [Correlation:8e1a3322-fea4-452a-80e2-cc049c902b05] HTTP GET /api/Urls/DFFB4CE0-7255-4AE7-A8BA-4F730972F6CA/analytics responded 401 in 1.4947 ms
+[2026-07-06 10:40:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:40:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:40:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:40:59 INF] [User:Anonymous] [Correlation:40289ea3-c681-47cc-ba89-4281a9a207ec] HTTP GET /health responded 200 in 4.7070 ms
+[2026-07-06 10:41:03 INF] [User:Anonymous] [Correlation:07eb53f6-7c03-47a7-b9fe-f189a67e492e] HTTP GET /.well-known/appspecific/com.chrome.devtools.json responded 404 in 0.0299 ms
+[2026-07-06 10:41:55 INF] [User:Anonymous] [Correlation:679e204d-a7e8-4fb4-90e3-d13685c6435d] HTTP GET /health responded 200 in 13.0014 ms
+[2026-07-06 10:41:55 INF] [User:Anonymous] [Correlation:653dca06-e938-442e-96de-6570b3c518de] HTTP GET /.well-known/appspecific/com.chrome.devtools.json responded 404 in 0.0287 ms
+[2026-07-06 10:41:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:41:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:41:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:42:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:42:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:42:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:43:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:43:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:43:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:44:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:44:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:44:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:45:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:45:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:45:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:46:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:46:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:46:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:47:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:47:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:47:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:48:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:48:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:48:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:49:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:49:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:49:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:50:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:50:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:50:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:51:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:51:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:51:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:52:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:52:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:52:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:53:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:53:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:53:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:54:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:54:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:54:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:55:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:55:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:55:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:56:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:56:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:56:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:57:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:57:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:57:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:58:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:58:56 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:58:56 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 10:59:56 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 10:59:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 10:59:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:00:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:00:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:00:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:01:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:01:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:01:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:02:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:02:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:02:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:03:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:03:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:03:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:04:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:04:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:04:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:05:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:05:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:05:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:06:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:06:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:06:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:07:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:07:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:07:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:08:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:08:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:08:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:09:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:09:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:09:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:10:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:10:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:10:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:11:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:11:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:11:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:12:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:12:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:12:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:13:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:13:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:13:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:14:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:14:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:14:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:15:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:15:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:15:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:16:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:16:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:16:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:17:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:17:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:17:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:18:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:18:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:18:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:19:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:19:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:19:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:20:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:20:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:20:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:21:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:21:57 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:21:57 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:22:57 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:22:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:22:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:23:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:23:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:23:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:24:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:24:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:24:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:25:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:25:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:25:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:26:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:26:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:26:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:27:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:27:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:27:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:28:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:28:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:28:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:29:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:29:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:29:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:30:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:30:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:30:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:31:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:31:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:31:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:32:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:32:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:32:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:33:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:33:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:33:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:34:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:34:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:34:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:35:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:35:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:35:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:36:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:36:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:36:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:37:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:37:58 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:37:58 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:38:58 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:38:59 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:39:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:40:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:40:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:40:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:41:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:41:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:41:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:42:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:42:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:42:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:43:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:43:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:43:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:44:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:44:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:44:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:45:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:45:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:45:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:46:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:46:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:46:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:47:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:47:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:47:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:48:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:48:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:48:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:49:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:49:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:49:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:50:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:50:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:50:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:51:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:51:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:51:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:52:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:52:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:52:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:53:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:53:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:53:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:54:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:54:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:54:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:55:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:55:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:55:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:56:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:56:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:56:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:57:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:57:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:57:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:58:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:58:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:58:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 11:59:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 11:59:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 11:59:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 12:00:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 12:00:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 12:00:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 12:01:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 12:01:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 12:01:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 12:02:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 12:02:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 12:02:01 INF] [User:] [Correlation:] Cleanup completed.
+[2026-07-06 12:03:01 INF] [User:] [Correlation:] Running expired URL cleanup...
+[2026-07-06 12:03:01 INF] [User:] [Correlation:] No expired URLs found.
+[2026-07-06 12:03:01 INF] [User:] [Correlation:] Cleanup completed.
