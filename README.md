@@ -1,11 +1,10 @@
 <p align="center">
   <img src="docs/images/banner.png" alt="ShopSphere Banner"/>
 </p>
-
 <h1 align="center">🔗 URL Shortener API</h1>
 
 <p align="center">
-  <em>Enterprise-grade URL Shortening REST API — ASP.NET Core 8 · Clean Architecture · CQRS · MediatR · EF Core · JWT · Hangfire · Redis</em>
+  <em>Enterprise-grade URL Shortening REST API — ASP.NET Core 8 · Clean Architecture · CQRS · MediatR · EF Core · JWT · Serilog · GitHub Actions</em>
 </p>
 
 <p align="center">
@@ -43,24 +42,24 @@
 
 ## Table of Contents
 
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [Architecture](#-architecture)
-- [Solution Structure](#-solution-structure)
-- [Technology Stack](#-technology-stack)
-- [API Endpoints](#-api-endpoints)
-- [Security](#-security)
-- [Performance](#-performance)
-- [Health Checks](#-health-checks)
-- [Testing](#-testing)
-- [Running Locally](#-running-locally)
-- [Configuration](#-configuration)
-- [CI/CD](#-cicd)
-- [Screenshots](#-screenshots)
-- [Roadmap](#-roadmap)
-- [Engineering Practices](#-engineering-practices)
-- [License](#-license)
-- [Author](#-author)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Architecture](#architecture)
+- [Solution Structure](#solution-structure)
+- [Technology Stack](#technology-stack)
+- [API Endpoints](#api-endpoints)
+- [Security](#security)
+- [Performance](#performance)
+- [Health Checks](#health-checks)
+- [Testing](#testing)
+- [Running Locally](#running-locally)
+- [Configuration](#configuration)
+- [CI/CD](#cicd)
+- [Screenshots](#screenshots)
+- [Roadmap](#roadmap)
+- [Engineering Practices](#engineering-practices)
+- [License](#license)
+- [Author](#author)
 
 ---
 
